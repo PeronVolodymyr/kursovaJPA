@@ -1,9 +1,8 @@
-package per.example.kursova.service.TypeOfSubject;
+package per.example.kursova.service.typeOfSubject;
 
 
 import per.example.kursova.model.TypeOfSubject;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface ITypeOfSubjectService {

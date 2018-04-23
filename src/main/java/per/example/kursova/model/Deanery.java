@@ -1,18 +1,30 @@
 package per.example.kursova.model;
 
+import javax.persistence.*;
+
+@Entity
 public class Deanery {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(name = "address")
     private String address;
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     public Deanery() {
     }
 
-    public Deanery(int id, String address, String phoneNumber) {
-        this.id = id;
+    public Deanery(String address, String phoneNumber) {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
+
+    //    public Deanery(int id, String address, String phoneNumber) {
+//        this.id = id;
+//        this.address = address;
+//        this.phoneNumber = phoneNumber;
+//    }
 
     public int getId() {
         return id;

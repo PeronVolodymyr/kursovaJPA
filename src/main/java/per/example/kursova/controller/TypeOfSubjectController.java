@@ -2,11 +2,9 @@ package per.example.kursova.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import per.example.kursova.model.CategoryOfTeacher;
 import per.example.kursova.model.TypeOfSubject;
-import per.example.kursova.service.TypeOfSubject.TypeOfSubjectServiceImpl;
+import per.example.kursova.service.typeOfSubject.TypeOfSubjectServiceImpl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @RestController

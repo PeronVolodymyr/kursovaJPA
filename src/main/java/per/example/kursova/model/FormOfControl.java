@@ -1,16 +1,26 @@
 package per.example.kursova.model;
 
+import javax.persistence.*;
+
+@Entity
 public class FormOfControl {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column(name = "form")
     private String form;
 
     public FormOfControl() {
     }
 
-    public FormOfControl(int id, String form) {
-        this.id = id;
+    public FormOfControl(String form) {
         this.form = form;
     }
+
+    //    public FormOfControl(int id, String form) {
+//        this.id = id;
+//        this.form = form;
+//    }
 
     public int getId() {
         return id;

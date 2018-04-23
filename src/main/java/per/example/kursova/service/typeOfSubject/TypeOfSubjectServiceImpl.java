@@ -1,4 +1,4 @@
-package per.example.kursova.service.TypeOfSubject;
+package per.example.kursova.service.typeOfSubject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
