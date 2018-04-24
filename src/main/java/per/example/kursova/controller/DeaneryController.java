@@ -3,7 +3,6 @@ package per.example.kursova.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import per.example.kursova.model.Deanery;
-import per.example.kursova.model.FormOfControl;
 import per.example.kursova.service.deanery.DeaneryServiceImpl;
 
 import java.sql.SQLException;
@@ -37,5 +36,11 @@ public class DeaneryController {
     {
         deanery.setId(id);
         return deaneryService.updateDeanery(deanery);
+    }
+
+    @GetMapping("/deanery/get")
+    Deanery getDeaneryById(@RequestParam("id") int id)
+    {
+        return deaneryService.getDeanery(id);
     }
 }

@@ -37,5 +37,11 @@ public class CategoryOfTeacherController {
         return categoryOfTeacherService.updateCategoryOfTeacher(categoryOfTeacher);
     }
 
+    @GetMapping("/category of teacher/get")
+    CategoryOfTeacher getCategoryOfTeacherById(@RequestParam("id") int id)
+    {
+        return categoryOfTeacherService.getCategoryOfTeacher(id);
+    }
+
 
 }

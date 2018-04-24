@@ -36,4 +36,10 @@ public class FormOfControlController {
         formOfControl.setId(id);
         return formOfControlService.updateFormOfControl(formOfControl);
     }
+
+    @GetMapping("/form of control/get")
+    FormOfControl getFormOfControlById(@RequestParam("id") int id)
+    {
+        return formOfControlService.getFormOfControl(id);
+    }
 }

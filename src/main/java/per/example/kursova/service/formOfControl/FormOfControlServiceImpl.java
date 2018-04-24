@@ -21,7 +21,8 @@ public class FormOfControlServiceImpl implements IFormOfControlService {
 
     @Override
     public FormOfControl getFormOfControl(int id) {
-        return null;
+
+        return formOfControlRepository.findById(id).get();
     }
 
     @Override

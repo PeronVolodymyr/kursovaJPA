@@ -21,7 +21,8 @@ public class TypeOfSubjectServiceImpl implements ITypeOfSubjectService {
 
     @Override
     public TypeOfSubject getTypeOfSubject(int id) {
-        return null;
+
+        return typeOfSubjectRepository.findById(id).get();
     }
 
     @Override

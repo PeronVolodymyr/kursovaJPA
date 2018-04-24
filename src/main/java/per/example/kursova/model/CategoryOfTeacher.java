@@ -3,9 +3,10 @@ package per.example.kursova.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "category_of_teacher")
 public class CategoryOfTeacher {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "category")
     private String category;

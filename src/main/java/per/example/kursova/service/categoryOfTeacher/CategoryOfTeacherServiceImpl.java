@@ -21,7 +21,8 @@ public class CategoryOfTeacherServiceImpl implements ICategoryOfTeacherService {
 
     @Override
     public CategoryOfTeacher getCategoryOfTeacher(int id) {
-        return null;
+
+        return categoryOfTeacherRepository.findById(id).get();
     }
 
     @Override

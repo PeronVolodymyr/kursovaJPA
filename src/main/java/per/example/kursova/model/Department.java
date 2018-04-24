@@ -1,24 +1,34 @@
 package per.example.kursova.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "department")
 public class Department {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "dean")
     private String dean;
+    @OneToOne
     private Deanery deanery;
 
     public Department() {
     }
 
-    public Department(int id, String name, String dean, Deanery deanery) {
-        this.id = id;
+    public Department(String name, String dean, Deanery deanery) {
         this.name = name;
         this.dean = dean;
         this.deanery = deanery;
     }
 
+
     public int getId() {
-        return id;
-    }
+    return id;
+}
 
     public void setId(int id) {
         this.id = id;

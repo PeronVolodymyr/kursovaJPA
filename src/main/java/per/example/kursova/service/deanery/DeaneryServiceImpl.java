@@ -21,7 +21,7 @@ public class DeaneryServiceImpl implements IDeaneryService {
 
     @Override
     public Deanery getDeanery(int id) {
-        return null;
+        return deaneryRepository.findById(id).get();
     }
 
     @Override

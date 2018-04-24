@@ -35,4 +35,10 @@ public class TypeOfSubjectController {
         typeOfSubject.setId(id);
         return typeOfSubjectService.updateTypeOfSubject(typeOfSubject);
     }
+
+    @GetMapping("/type of subject/get")
+    TypeOfSubject getTypeOfSubjectById(@RequestParam("id") int id)
+    {
+        return typeOfSubjectService.getTypeOfSubject(id);
+    }
 }
