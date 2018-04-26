@@ -18,10 +18,10 @@ app.controller("AppCtrl", function ($scope, $http) {
     //       // console.log(response);
     // });
 
-    $scope.categoriesOfTeacher = [];
-    $http.get('/api/categories of teacher').then(function (response) {
-        $scope.categoriesOfTeacher = response.data;
-    });
+    // $scope.categoriesOfTeacher = [];
+    // $http.get('/api/categories of teacher').then(function (response) {
+    //     $scope.categoriesOfTeacher = response.data;
+    // });
 
     // $scope.typesOfSubject = [];
     // $http.get('/api/types of subject').then(function (response) {

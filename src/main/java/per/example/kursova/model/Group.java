@@ -1,16 +1,25 @@
 package per.example.kursova.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "\"group\"")
 public class Group {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "course")
     private int course;
+    @Column(name = "number")
     private int number;
+    @ManyToOne
+    @JoinColumn(name = "chair_id")
     private Chair chair;
 
     public Group() {
     }
 
-    public Group(int id, int course, int number, Chair chair) {
-        this.id = id;
+    public Group(int course, int number, Chair chair) {
         this.course = course;
         this.number = number;
         this.chair = chair;
