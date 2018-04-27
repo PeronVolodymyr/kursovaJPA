@@ -1,21 +1,32 @@
 package per.example.kursova.model;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
+@Table(name = "teacher")
 public class Teacher {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
+    @Column(name = "count_of_children")
     private int countOfChildren;
+    @Column(name = "salary")
     private int salary;
+    @ManyToOne
+    @JoinColumn(name = "category_of_teacher_id")
     private CategoryOfTeacher categoryOfTeacher;
+    @ManyToOne
+    @JoinColumn(name = "chair_id")
     private Chair chair;
 
     public Teacher() {
     }
 
-    public Teacher(int id, String name, LocalDate dateOfBirth, int countOfChildren, int salary, CategoryOfTeacher categoryOfTeacher, Chair chair) {
-        this.id = id;
+    public Teacher(String name, LocalDate dateOfBirth, int countOfChildren, int salary, CategoryOfTeacher categoryOfTeacher, Chair chair) {
         this.name = name;
         this.dateOfBirth = dateOfBirth;
         this.countOfChildren = countOfChildren;
