@@ -1,17 +1,28 @@
 package per.example.kursova.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "subject")
 public class Subject {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "number_of_hours")
     private int numberOfHours;
+    @ManyToOne
+    @JoinColumn(name = "type_of_subject_id")
     private TypeOfSubject typeOfSubject;
+    @ManyToOne
+    @JoinColumn(name = "form_of_control_id")
     private FormOfControl formOfControl;
 
     public Subject() {
     }
 
-    public Subject(int id, String name, int numberOfHours, TypeOfSubject typeOfSubject, FormOfControl formOfControl) {
-        this.id = id;
+    public Subject(String name, int numberOfHours, TypeOfSubject typeOfSubject, FormOfControl formOfControl) {
         this.name = name;
         this.numberOfHours = numberOfHours;
         this.typeOfSubject = typeOfSubject;

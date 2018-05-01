@@ -91,7 +91,7 @@ app.controller("AppCtrl", function ($scope, $http) {
         $http.get('/api/chairs').then(function (response) {
             var chairs = response.data;
             var selector = document.getElementById("updateChair");
-            // $(selector).empty();
+            $(selector).empty();
             for (var i = 0; i < chairs.length; i++) {
                 var option = document.createElement("option");
                 if(chairs[i].id == teacher.chair.id)
@@ -105,7 +105,7 @@ app.controller("AppCtrl", function ($scope, $http) {
         $http.get('/api/categories of teacher').then(function (response) {
             var categories = response.data;
             var selector = document.getElementById("updateCategoryOfTeacher");
-            // $(selector).empty();
+            $(selector).empty();
             for (var i = 0; i < categories.length; i++) {
                 var option = document.createElement("option");
                 if(categories[i].id == teacher.categoryOfTeacher.id)
