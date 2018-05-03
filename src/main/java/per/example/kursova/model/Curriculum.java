@@ -1,17 +1,29 @@
 package per.example.kursova.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "curriculum")
 public class Curriculum {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "semestr")
     private int semester;
+    @ManyToOne
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
+    @ManyToOne
+    @JoinColumn(name = "subject_id")
     private Subject subject;
+    @ManyToOne
+    @JoinColumn(name = "group_id")
     private Group group;
 
     public Curriculum() {
     }
 
-    public Curriculum(int id, int semester, Teacher teacher, Subject subject, Group group) {
-        this.id = id;
+    public Curriculum(int semester, Teacher teacher, Subject subject, Group group) {
         this.semester = semester;
         this.teacher = teacher;
         this.subject = subject;
