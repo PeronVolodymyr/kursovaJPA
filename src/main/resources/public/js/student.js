@@ -26,12 +26,19 @@ app.controller("AppCtrl", function ($scope, $http) {
             }
         });
         var selector = document.getElementById("children");
+        var defaultOption = document.createElement("option");
         var trueOption = document.createElement("option");
         var falseOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.text = "Наявність дітей";
+        defaultOption.disabled;
+        defaultOption.selected = true;
         trueOption.text = "Так";
         trueOption.value = true;
         falseOption.text = "Ні";
         falseOption.value = false;
+        $(selector).empty();
+        selector.add(defaultOption);
         selector.add(trueOption);
         selector.add(falseOption);
     };
@@ -66,7 +73,7 @@ app.controller("AppCtrl", function ($scope, $http) {
             })
         });
     };
-
+    
     this.deleteStudent = function del(id) {
         $http.get("api/student/delete?id="+id).then(function (response) {
             window.location.reload();

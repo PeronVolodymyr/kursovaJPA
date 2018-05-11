@@ -23,9 +23,7 @@
                                 <h4>Добавлення студента:</h4>
                                 <input class="form-control" type="text" name="name" id="name" placeholder="ПІБ"><br>
                                 <input class="form-control" type="text" onfocus="(this.type='date')" name="dateOfBirth" id="dateOfBirth" placeholder="Дата народження"><br>
-                                <select required class="form-control" type="text" name="children" id="children">
-                                    <option value="" selected disabled>Наявність дітей</option>
-                                </select><br>
+                                <select required class="form-control" type="text" name="children" id="children"></select><br>
                                 <input class="form-control" type="text" name="scholarship" id="scholarship" placeholder="Розмір стипендії"><br>
                                 <select required class="form-control" type="text" name="group" id="group"></select><br>
                                 <button type="button" class="btn btn-primary" ng-click="ctrl.insertStudent()">Добавити</button>

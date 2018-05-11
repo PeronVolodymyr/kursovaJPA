@@ -44,7 +44,7 @@
                         <td>{{item.type}}</td>
                         <td class="text-right">
                             <button type="button" class="btn btn-warning" ng-click="ctrl.startUpdate(item.id,item.type)" data-toggle="collapse" data-target="#collapseThreeUpdate" aria-expanded="false" aria-controls="collapseThree" type="button"><i class="fa fa-refresh" aria-hidden="true"></i></button>
-                            <button type="button" class="btn btn-danger" ng-click="ctrl.deleteTypeOfSubject(item.id)"><i class="fa fa-remove"></i></button>
+                            <button type="button" class="btn btn-danger" ng-click="ctrl.deleteTypeOfSubject(item.id, $index)"><i class="fa fa-remove"></i></button>
                         </td>
                     </tr>
                     </tbody>

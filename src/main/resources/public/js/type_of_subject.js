@@ -17,13 +17,18 @@ app.controller("TypeOfSubject", function ($scope, $http) {
         // console.log(req);
         $http(req).then(function (resp) {
             window.location.reload();
-        })
+        });
+        // //incorect(delete do not work)
+        // $scope.typesOfSubject.push({
+        //     type: type
+        // });
     };
 
-    this.deleteTypeOfSubject = function del(id) {
+    this.deleteTypeOfSubject = function del(id, index) {
         $http.get("api/type of subject/delete?id="+id).then(function (response) {
             window.location.reload();
         });
+        // $scope.typesOfSubject.splice(index,1);
     };
 
     this.startUpdate = function startUpdate(id, type) {
