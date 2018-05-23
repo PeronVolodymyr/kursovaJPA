@@ -50,7 +50,6 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public List<Teacher> getTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(LocalDate startDate, LocalDate endDate) {
-        System.out.println(startDate + "  " + endDate);
         return teacherRepository.GetTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(startDate, endDate);
     }
 }
