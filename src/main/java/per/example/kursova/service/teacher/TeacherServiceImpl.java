@@ -57,4 +57,9 @@ public class TeacherServiceImpl implements ITeacherService {
     public List<Teacher> getTeachersByLessonAndCourse(int subject_id, int course) {
         return teacherRepository.getTeachersByLessonAndCourse(subject_id, course);
     }
+
+    @Override
+    public int getNumberOfTeachersByLessonsInTheGroup(int group_id) {
+        return teacherRepository.getNumberOfTeachersByLessonsInTheGroup(group_id);
+    }
 }

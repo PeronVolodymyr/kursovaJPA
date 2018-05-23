@@ -18,4 +18,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 
     @Query("select c.teacher from Curriculum c where c.subject.id = :subject_id and c.group.course = :course")
     List<Teacher> getTeachersByLessonAndCourse(@Param("subject_id") int subject_id, @Param("course") int course);
+
+    @Query("select count( distinct c.teacher) from Curriculum c where c.group.id = :group_id")
+    int getNumberOfTeachersByLessonsInTheGroup(@Param("group_id") int group_id);
 }

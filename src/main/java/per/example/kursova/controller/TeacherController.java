@@ -58,4 +58,9 @@ public class TeacherController {
     List<Teacher> getTeachersByLessonAndCourse(@RequestParam("subject_id") int subject_id, @RequestParam("course") int course){
         return teacherService.getTeachersByLessonAndCourse(subject_id, course);
     }
+
+    @GetMapping("/teacher/get count by lessons in the group")
+    int getNumberOfTeachersByLessonsInTheGroup(@RequestParam("group_id") int group_id){
+        return teacherService.getNumberOfTeachersByLessonsInTheGroup(group_id);
+    }
 }
