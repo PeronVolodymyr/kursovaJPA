@@ -41,4 +41,15 @@ public class StudentController {
         student.setId(id);
         return studentService.updateStudent(student);
     }
+    @GetMapping("/student/get by group")
+    List<Student> getStudentsByGroup(@RequestParam("group_id") int group_id)
+    {
+        return studentService.getStudentsByGroup(group_id);
+    }
+    @GetMapping("/number of student/get by department")
+    int getNumberOfStudentsByDepartment(@RequestParam("department_id") int department_id)
+    {
+        return studentService.getNumberOfStudentsByDepartment(department_id);
+    }
+
 }

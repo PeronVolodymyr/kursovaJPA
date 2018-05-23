@@ -12,4 +12,6 @@ public interface IStudentService {
     public Student updateStudent(Student student);
     public void deleteStudent(int id);
     public List<Student> getAll();
+    public List<Student> getStudentsByGroup(int group_id);
+    public int getNumberOfStudentsByDepartment(int department_id);
 }

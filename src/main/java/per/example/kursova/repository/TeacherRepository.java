@@ -1,7 +1,18 @@
 package per.example.kursova.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import per.example.kursova.model.Teacher;
 
+import java.time.LocalDate;
+import java.util.List;
+
 public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
+
+    @Query("select t from Teacher t where t.chair.id = :chair_id")
+    List<Teacher> getTeachersByChair(@Param("chair_id") int chair_id);
+
+    @Query("select d.teacher from DoctoralDissertation d where d.protectionDate between :startDate and :endDate")
+    List<Teacher> GetTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }

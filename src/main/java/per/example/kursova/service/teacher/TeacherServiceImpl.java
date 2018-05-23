@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import per.example.kursova.model.Teacher;
 import per.example.kursova.repository.TeacherRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -40,5 +41,16 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public List<Teacher> getAll(){
         return teacherRepository.findAll();
+    }
+
+    @Override
+    public List<Teacher> getTeachersByChair(int chair_id) {
+        return teacherRepository.getTeachersByChair(chair_id);
+    }
+
+    @Override
+    public List<Teacher> getTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(LocalDate startDate, LocalDate endDate) {
+        System.out.println(startDate + "  " + endDate);
+        return teacherRepository.GetTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(startDate, endDate);
     }
 }

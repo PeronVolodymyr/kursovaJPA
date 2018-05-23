@@ -6,6 +6,8 @@ import per.example.kursova.model.Student;
 import per.example.kursova.model.Teacher;
 import per.example.kursova.service.teacher.TeacherServiceImpl;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -41,5 +43,14 @@ public class TeacherController {
     {
         teacher.setId(id);
         return teacherService.updateTeacher(teacher);
+    }
+    @GetMapping("/teacher/get teachers by chair")
+    List<Teacher> getTeachersByChair(@RequestParam("chair_id") int chair_id){
+        return teacherService.getTeachersByChair(chair_id);
+    }
+    @GetMapping("/teacher/get by protection of doctoral dissertation during specified time")
+    List<Teacher> GetTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(@RequestParam("startDate") Date startDate,
+                                                                                   @RequestParam("endDate") Date endDate){
+        return teacherService.getTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(startDate.toLocalDate(), endDate.toLocalDate());
     }
 }

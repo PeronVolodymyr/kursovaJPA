@@ -38,6 +38,15 @@ public class StudentServiceImpl implements IStudentService {
     @Override
     public List<Student> getAll() {
         return studentRepository.findAll();
+    }
 
+    @Override
+    public List<Student> getStudentsByGroup(int group_id) {
+        return studentRepository.getStudentsByGroup(group_id);
+    }
+
+    @Override
+    public int getNumberOfStudentsByDepartment(int department_id) {
+        return studentRepository.getNumberOfStudentsByDepartment(department_id);
     }
 }
