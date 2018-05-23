@@ -40,4 +40,9 @@ public class ChairServiceImpl implements IChairService {
     public List<Chair> getAll(){
         return chairRepository.findAll();
     }
+
+    @Override
+    public List<Chair> getChairsByLessonsInGroup(int group_id) {
+        return chairRepository.getChairsByLessonsInGroup(group_id);
+    }
 }

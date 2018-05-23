@@ -40,4 +40,8 @@ public class CandidatesDissertationServiceImpl implements ICandidatesDissertatio
         return candidateDissertationRepository.findAll();
     }
 
+    @Override
+    public List<CandidatesDissertation> getCandidatesDissertationsByDepartmentOfTeachers(int department_id) {
+        return candidateDissertationRepository.getCandidatesDissertationsByDepartmentOfTeachers(department_id);
+    }
 }

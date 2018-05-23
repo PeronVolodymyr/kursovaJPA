@@ -11,4 +11,5 @@ public interface ICandidatesDissertationService {
     public CandidatesDissertation updateCandidatesDissertation(CandidatesDissertation candidatesDissertation);
     public void deleteCandidatesDissertation(int id);
     public List<CandidatesDissertation> getAll();
+    List<CandidatesDissertation> getCandidatesDissertationsByDepartmentOfTeachers(int department_id);
 }

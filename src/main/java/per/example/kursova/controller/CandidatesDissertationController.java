@@ -42,4 +42,10 @@ public class CandidatesDissertationController {
         return candidatesDissertationService.updateCandidatesDissertation(candidatesDissertation);
     }
 
+    @GetMapping("/candidate dissertation/get by chair of teacher")
+    List<CandidatesDissertation> getCandidatesDissertationsByDepartmentOfTeachers(@RequestParam("department_id") int department_id)
+    {
+        return candidatesDissertationService.getCandidatesDissertationsByDepartmentOfTeachers(department_id);
+    }
+
 }

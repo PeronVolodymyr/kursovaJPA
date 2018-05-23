@@ -52,4 +52,9 @@ public class TeacherServiceImpl implements ITeacherService {
     public List<Teacher> getTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(LocalDate startDate, LocalDate endDate) {
         return teacherRepository.GetTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(startDate, endDate);
     }
+
+    @Override
+    public List<Teacher> getTeachersByLessonAndCourse(int subject_id, int course) {
+        return teacherRepository.getTeachersByLessonAndCourse(subject_id, course);
+    }
 }

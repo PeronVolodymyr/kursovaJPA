@@ -11,4 +11,5 @@ public interface IChairService {
     public Chair updateChair(Chair chair);
     public void deleteChair(int id);
     public List<Chair> getAll();
+    List<Chair> getChairsByLessonsInGroup(int group_id);
 }

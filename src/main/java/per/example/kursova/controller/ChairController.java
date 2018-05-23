@@ -42,4 +42,10 @@ public class ChairController {
         chair.setId(id);
         return chairService.updateChair(chair);
     }
+
+    @GetMapping("/chair/get by lessons in group")
+    List<Chair> getChairsByLessonsInGroup(@RequestParam("group_id") int group_id)
+    {
+        return chairService.getChairsByLessonsInGroup(group_id);
+    }
 }

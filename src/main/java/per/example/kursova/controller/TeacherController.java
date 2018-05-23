@@ -53,4 +53,9 @@ public class TeacherController {
                                                                                    @RequestParam("endDate") Date endDate){
         return teacherService.getTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(startDate.toLocalDate(), endDate.toLocalDate());
     }
+
+    @GetMapping("/teacher/get by lesson and course")
+    List<Teacher> getTeachersByLessonAndCourse(@RequestParam("subject_id") int subject_id, @RequestParam("course") int course){
+        return teacherService.getTeachersByLessonAndCourse(subject_id, course);
+    }
 }

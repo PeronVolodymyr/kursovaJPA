@@ -15,4 +15,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 
     @Query("select d.teacher from DoctoralDissertation d where d.protectionDate between :startDate and :endDate")
     List<Teacher> GetTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
+
+    @Query("select c.teacher from Curriculum c where c.subject.id = :subject_id and c.group.course = :course")
+    List<Teacher> getTeachersByLessonAndCourse(@Param("subject_id") int subject_id, @Param("course") int course);
 }
