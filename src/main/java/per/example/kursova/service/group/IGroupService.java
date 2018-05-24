@@ -11,4 +11,5 @@ public interface IGroupService {
     public Group updateGroup(Group group);
     public void deleteGroup(int id);
     public List<Group> getAll();
+    List<Group> getGroupsOrderByAverageMark();
 }

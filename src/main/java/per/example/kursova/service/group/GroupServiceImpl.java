@@ -39,4 +39,9 @@ public class GroupServiceImpl implements IGroupService {
     public List<Group> getAll() {
         return groupRepository.findAll();
     }
+
+    @Override
+    public List<Group> getGroupsOrderByAverageMark() {
+        return groupRepository.getGroupsOrderByAverageMark();
+    }
 }

@@ -64,4 +64,14 @@ public class StudentServiceImpl implements IStudentService {
     public List<Student> getStudentsFromSessionByLesson(int subject_id) {
         return studentRepository.getStudentsFromSessionByLesson(subject_id);
     }
+
+    @Override
+    public List<Student> getStudentsFromSessionByLessonAndMark(int subject_id, int mark) {
+        return studentRepository.getStudentsFromSessionByLessonAndMark(subject_id, mark);
+    }
+
+    @Override
+    public List<Student> getGreatStudentsByGroup(int group_id) {
+        return studentRepository.getGreatStudentsByGroup(group_id);
+    }
 }

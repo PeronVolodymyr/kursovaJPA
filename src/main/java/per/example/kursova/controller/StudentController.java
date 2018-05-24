@@ -70,4 +70,16 @@ public class StudentController {
         return studentService.getStudentsFromSessionByLesson(subject_id);
     }
 
+    @GetMapping("/student/get from session by lesson and mark")
+    List<Student> getStudentsFromSessionByLessonAndMark(@RequestParam("subject_id") int subject_id, @RequestParam("mark") int mark)
+    {
+        return studentService.getStudentsFromSessionByLessonAndMark(subject_id, mark);
+    }
+
+    @GetMapping("/student/get great by group")
+    List<Student> getGreatStudentsByGroup(@RequestParam("group_id") int group_id)
+    {
+        return studentService.getGreatStudentsByGroup(group_id);
+    }
+
 }

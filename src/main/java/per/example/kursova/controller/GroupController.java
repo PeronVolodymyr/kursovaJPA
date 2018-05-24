@@ -42,4 +42,11 @@ public class GroupController {
         group.setId(id);
         return groupService.updateGroup(group);
     }
+
+    @GetMapping("/group/get order by average mark")
+    List<Group> getGroupsOrderByAverageMark()
+    {
+        return groupService.getGroupsOrderByAverageMark();
+    }
+
 }
