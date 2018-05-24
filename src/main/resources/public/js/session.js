@@ -21,14 +21,16 @@ app.controller("AppCtrl", function ($scope, $http) {
             for (var i = 0; i < curriculum.length; i++) {
                 if(curriculum[i].subject.typeOfSubject.type == "Лекція") {
                     var option = document.createElement("option");
-                    option.text = curriculum[i].subject.name + " - " + curriculum[i].semester + " семестер";
+                    option.text = curriculum[i].subject.name + ",   "
+                        + curriculum[i].semester + "  семестер,   "
+                        + curriculum[i].group.number + "  група";
                     option.value = curriculum[i].id;
                     selector.add(option);
                 }
             }
         });
 
-        $http.get('/api/students').then(function (response) {
+        $http.get('/api/student/get from curriculum').then(function (response) {
             var students = response.data;
             var defaultOption = document.createElement("option");
             defaultOption.value="";
@@ -85,23 +87,10 @@ app.controller("AppCtrl", function ($scope, $http) {
     };
 
     this.startUpdateSession= function startUpdate(session) {
-        $http.get('/api/curriculum').then(function (response) {
-            var curriculum = response.data;
-            var selector = document.getElementById("updateCurriculum");
-            $(selector).empty();
-            for (var i = 0; i < curriculum.length; i++) {
-                if(curriculum[i].subject.typeOfSubject.type == "Лекція") {
-                    var option = document.createElement("option");
-                    if (curriculum[i].id == session.curriculum.id)
-                        option.selected = 'selected';
-                    option.text = curriculum[i].subject.name + " - " + curriculum[i].semester + " семестер";
-                    option.value = curriculum[i].id;
-                    selector.add(option);
-                }
-            }
-        });
 
-        $http.get('/api/students').then(function (response) {
+        $scope.selectedStudent = session.student;
+
+        $http.get('/api/student/get from curriculum').then(function (response) {
             var students = response.data;
             var selector = document.getElementById("updateStudent");
             $(selector).empty();
@@ -112,6 +101,27 @@ app.controller("AppCtrl", function ($scope, $http) {
                 option.text = students[i].name;
                 option.value = students[i].id;
                 selector.add(option);
+            }
+        });
+
+        $http.get('/api/curriculum').then(function (response) {
+            var curriculum = response.data;
+            var selector = document.getElementById("updateCurriculum");
+
+            $(selector).empty();
+            for (var i = 0; i < curriculum.length; i++) {
+                if (curriculum[i].subject.typeOfSubject.type == "Лекція") {
+                    if (curriculum[i].group.id == $scope.selectedStudent.group.id) {
+                        var option = document.createElement("option");
+                        if (curriculum[i].id == session.curriculum.id)
+                            option.selected = 'selected';
+                        option.text = curriculum[i].subject.name + ",   "
+                            + curriculum[i].semester + "  семестер,   "
+                            + curriculum[i].group.number + "  група";
+                        option.value = curriculum[i].id;
+                        selector.add(option);
+                    }
+                }
             }
         });
 
@@ -150,5 +160,74 @@ app.controller("AppCtrl", function ($scope, $http) {
             });
         });
     };
+
+    document.getElementById("student").addEventListener("change", changeStudentInsert);
+    function changeStudentInsert() {
+        var indexStudent= document.getElementById("student").selectedIndex;
+        var studentId= document.getElementById("student").options[indexStudent].value;
+
+        $http.get('/api/student/get?id=' + studentId).then(function (response) {
+            $scope.selectedStudentInsert = response.data;
+        });
+
+        $http.get('/api/curriculum').then(function (response) {
+            var curriculum = response.data;
+            var selector = document.getElementById("curriculum");
+
+            var defaultOption = document.createElement("option");
+            defaultOption.value="";
+            defaultOption.text = "Виберіть предмет";
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            $(selector).empty();
+            selector.add(defaultOption);
+            for (var i = 0; i < curriculum.length; i++) {
+                if (curriculum[i].subject.typeOfSubject.type == "Лекція") {
+                    if (curriculum[i].group.id == $scope.selectedStudentInsert.group.id) {
+                        var option = document.createElement("option");
+                        option.text = curriculum[i].subject.name + ",   "
+                            + curriculum[i].semester + "  семестер,   "
+                            + curriculum[i].group.number + "  група";
+                        option.value = curriculum[i].id;
+                        selector.add(option);
+                    }
+                }
+            }
+        });
+    }
+
+    document.getElementById("updateStudent").addEventListener("change", changeStudentUpdate);
+    function changeStudentUpdate() {
+        var indexStudent= document.getElementById("updateStudent").selectedIndex;
+        var studentId= document.getElementById("updateStudent").options[indexStudent].value;
+
+        $http.get('/api/student/get?id=' + studentId).then(function (response) {
+            $scope.selectedStudentUpdate = response.data;
+        });
+
+        $http.get('/api/curriculum').then(function (response) {
+            var curriculum = response.data;
+            var selector = document.getElementById("updateCurriculum");
+            var defaultOption = document.createElement("option");
+            defaultOption.value="";
+            defaultOption.text = "Виберіть предмет";
+            defaultOption.disabled = true;
+            defaultOption.selected = true;
+            $(selector).empty();
+            selector.add(defaultOption);
+            for (var i = 0; i < curriculum.length; i++) {
+                if (curriculum[i].subject.typeOfSubject.type == "Лекція") {
+                    if (curriculum[i].group.id == $scope.selectedStudentUpdate.group.id) {
+                        var option = document.createElement("option");
+                        option.text = curriculum[i].subject.name + ",   "
+                            + curriculum[i].semester + "  семестер,   "
+                            + curriculum[i].group.number + "  група";
+                        option.value = curriculum[i].id;
+                        selector.add(option);
+                    }
+                }
+            }
+        });
+    }
 
 });

@@ -52,4 +52,22 @@ public class StudentController {
         return studentService.getNumberOfStudentsByDepartment(department_id);
     }
 
+    @GetMapping("/student/get by session mark")
+    List<Student> getStudentsBySessionMark(@RequestParam("mark") int mark)
+    {
+        return studentService.getStudentsBySessionMark(mark);
+    }
+
+    @GetMapping("/student/get from curriculum")
+    List<Student> getStudentsFromCurriculum()
+    {
+        return studentService.getStudentsFromCurriculum();
+    }
+
+    @GetMapping("/student/get from session by lesson")
+    List<Student> getStudentsFromSessionByLesson(@RequestParam("subject_id") int subject_id)
+    {
+        return studentService.getStudentsFromSessionByLesson(subject_id);
+    }
+
 }

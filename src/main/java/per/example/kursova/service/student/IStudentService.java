@@ -7,11 +7,14 @@ import java.util.List;
 
 public interface IStudentService {
 
-    public Student insertStudent(Student student);
-    public Student getStudent(int id);
-    public Student updateStudent(Student student);
-    public void deleteStudent(int id);
-    public List<Student> getAll();
-    public List<Student> getStudentsByGroup(int group_id);
-    public int getNumberOfStudentsByDepartment(int department_id);
+    Student insertStudent(Student student);
+    Student getStudent(int id);
+    Student updateStudent(Student student);
+    void deleteStudent(int id);
+    List<Student> getAll();
+    List<Student> getStudentsByGroup(int group_id);
+    int getNumberOfStudentsByDepartment(int department_id);
+    List<Student> getStudentsBySessionMark(int mark);
+    List<Student> getStudentsFromCurriculum();
+    List<Student> getStudentsFromSessionByLesson(int subject_id);
 }

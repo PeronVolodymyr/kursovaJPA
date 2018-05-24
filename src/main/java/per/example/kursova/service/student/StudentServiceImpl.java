@@ -49,4 +49,19 @@ public class StudentServiceImpl implements IStudentService {
     public int getNumberOfStudentsByDepartment(int department_id) {
         return studentRepository.getNumberOfStudentsByDepartment(department_id);
     }
+
+    @Override
+    public List<Student> getStudentsBySessionMark(int mark) {
+        return studentRepository.getStudentsBySessionMark(mark);
+    }
+
+    @Override
+    public List<Student> getStudentsFromCurriculum() {
+        return studentRepository.getStudentsFromCurriculum();
+    }
+
+    @Override
+    public List<Student> getStudentsFromSessionByLesson(int subject_id) {
+        return studentRepository.getStudentsFromSessionByLesson(subject_id);
+    }
 }

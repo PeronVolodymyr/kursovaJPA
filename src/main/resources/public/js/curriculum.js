@@ -38,7 +38,10 @@ app.controller("AppCtrl", function ($scope, $http) {
             selector.add(defaultOption);
             for (var i = 0; i < subjects.length; i++) {
                 var option = document.createElement("option");
-                option.text = subjects[i].name + " - " +  subjects[i].typeOfSubject.type;
+                option.text = subjects[i].name + ",  "
+                    +  subjects[i].typeOfSubject.type + ",  "
+                    +  subjects[i].formOfControl.form + ",  "
+                    +  subjects[i].numberOfHours + "  годин";
                 option.value = subjects[i].id;
                 selector.add(option);
             }
@@ -129,7 +132,10 @@ app.controller("AppCtrl", function ($scope, $http) {
                 var option = document.createElement("option");
                 if(subjects[i].id == curriculum.subject.id)
                     option.selected = 'selected';
-                option.text = subjects[i].name + " - " + subjects[i].typeOfSubject.type;
+                option.text = subjects[i].name + ",  "
+                    +  subjects[i].typeOfSubject.type + ",  "
+                    +  subjects[i].formOfControl.form + ",  "
+                    +  subjects[i].numberOfHours + "  годин";
                 option.value = subjects[i].id;
                 selector.add(option);
             }
