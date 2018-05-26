@@ -40,4 +40,9 @@ public class SubjectServiceImpl implements ISubjectService {
     public List<Subject> getAll(){
         return subjectRepository.findAll();
     }
+
+    @Override
+    public List<Subject> getSubjectByType(int typeOfSubject_id) {
+        return subjectRepository.getSubjectsByType(typeOfSubject_id);
+    }
 }

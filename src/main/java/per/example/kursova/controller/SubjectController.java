@@ -42,4 +42,10 @@ public class SubjectController {
         subject.setId(id);
         return subjectService.updateSubject(subject);
     }
+
+    @GetMapping("/subject/get by type")
+    List<Subject> getSubjectByType(@RequestParam("typeOfSubject_id") int typeOfSubject_id)
+    {
+        return subjectService.getSubjectByType(typeOfSubject_id);
+    }
 }

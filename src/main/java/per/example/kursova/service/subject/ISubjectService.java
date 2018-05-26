@@ -10,4 +10,5 @@ public interface ISubjectService {
     public Subject updateSubject(Subject subject);
     public void deleteSubject(int id);
     public List<Subject> getAll();
+    List<Subject> getSubjectByType(int typeOfSubject_id);
 }
