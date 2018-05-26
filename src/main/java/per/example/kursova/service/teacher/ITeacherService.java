@@ -16,4 +16,6 @@ public interface ITeacherService {
     List<Teacher> getTeachersByProtectionOfDoctoralDissertationDuringSpecifiedTime(LocalDate startDate, LocalDate endDate);
     List<Teacher> getTeachersByLessonAndCourse(int subject_id, int course);
     int getNumberOfTeachersByLessonsInTheGroup(int group_id);
+    List<Teacher> getTeachersByExamInCurrentGroup(int group_id);
+    List<Teacher> getTeachersFromDiplomaByChair(int chair_id);
 }

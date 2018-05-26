@@ -79,4 +79,9 @@ public class StudentServiceImpl implements IStudentService {
     public List<Student> getStudentsWhoGetMoreThanOneEByGroup(int group_id) {
         return studentRepository.getStudentsWhoGetMoreThanOneEByGroup(group_id);
     }
+
+    @Override
+    public List<Student> getStudentsFromSessionBySubjectAndMarkAndTeacher(int subject_id, int mark, int teacher_id) {
+        return studentRepository.getStudentsFromSessionBySubjectAndMarkAndTeacher(subject_id, mark, teacher_id);
+    }
 }

@@ -41,4 +41,9 @@ public class DiplomaServiceImpl implements IDiplomaService {
     public List<Diploma> getAll() {
         return diplomaRepository.findAll();
     }
+
+    @Override
+    public List<Diploma> getDiplomaByTeacher(int teacher_id) {
+        return diplomaRepository.getDiplomaByTeacher(teacher_id);
+    }
 }

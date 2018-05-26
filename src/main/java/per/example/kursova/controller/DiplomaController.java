@@ -43,4 +43,10 @@ public class DiplomaController {
         return diplomaService.updateDiploma(diploma);
     }
 
+    @RequestMapping("/diploma/get by teacher")
+    List<Diploma> getDiplomaByTeacher(@RequestParam("teacher_id") int teacher_id)
+    {
+        return diplomaService.getDiplomaByTeacher(teacher_id);
+    }
+
 }

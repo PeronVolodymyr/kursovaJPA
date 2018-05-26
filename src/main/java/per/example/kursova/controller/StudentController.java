@@ -88,4 +88,12 @@ public class StudentController {
         return studentService.getStudentsWhoGetMoreThanOneEByGroup(group_id);
     }
 
+    @GetMapping("/student/get by exam and mark and teacher")
+    List<Student> getStudentsFromSessionBySubjectAndMarkAndTeacher(@RequestParam("subject_id") int subject_id,
+                                                                   @RequestParam("mark") int mark,
+                                                                   @RequestParam("teacher_id") int teacher_id)
+    {
+        return studentService.getStudentsFromSessionBySubjectAndMarkAndTeacher(subject_id, mark, teacher_id);
+    }
+
 }

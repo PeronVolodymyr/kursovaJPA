@@ -21,4 +21,10 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 
     @Query("select count( distinct c.teacher) from Curriculum c where c.group.id = :group_id")
     int getNumberOfTeachersByLessonsInTheGroup(@Param("group_id") int group_id);
+
+    @Query("select s.curriculum.teacher from Session s where s.curriculum.group.id = :group_id group by s.curriculum.teacher")
+    List<Teacher> getTeachersByExamInCurrentGroup(@Param("group_id")int group_id);
+
+    @Query("select d.teacher from Diploma d where d.teacher.chair.id = :chair_id")
+    List<Teacher> getTeachersFromDiplomaByChair(@Param("chair_id") int chair_id);
 }

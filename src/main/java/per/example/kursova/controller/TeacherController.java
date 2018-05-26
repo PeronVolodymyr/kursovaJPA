@@ -63,4 +63,14 @@ public class TeacherController {
     int getNumberOfTeachersByLessonsInTheGroup(@RequestParam("group_id") int group_id){
         return teacherService.getNumberOfTeachersByLessonsInTheGroup(group_id);
     }
+
+    @GetMapping("/teacher/get by exam in current group")
+    List<Teacher> getTeachersByExamInCurrentGroup(@RequestParam("group_id") int group_id){
+        return teacherService.getTeachersByExamInCurrentGroup(group_id);
+    }
+
+    @GetMapping("/teacher/get from diploma by chair")
+    List<Teacher> getTeachersFromDiplomaByChair(@RequestParam("chair_id") int chair_id){
+        return teacherService.getTeachersFromDiplomaByChair(chair_id);
+    }
 }

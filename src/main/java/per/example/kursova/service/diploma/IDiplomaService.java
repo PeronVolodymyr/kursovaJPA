@@ -11,4 +11,5 @@ public interface IDiplomaService {
     public Diploma updateDiploma(Diploma diploma);
     public void deleteDiploma(int id);
     public List<Diploma> getAll();
+    List<Diploma> getDiplomaByTeacher(int teacher_id);
 }

@@ -38,4 +38,11 @@ public interface StudentRepository extends JpaRepository<Student, Integer>{
     @Query("select s.student from Session s where s.mark = 2 and s.curriculum.group.id = :group_id group by s.student having count(s.student) > 1")
     List<Student> getStudentsWhoGetMoreThanOneEByGroup(@Param("group_id")int group_id);
 
+    @Query("select s.student from Session s where s.curriculum.subject.id = :subject_id and s.mark =:mark " +
+            "and s.curriculum.teacher.id = :teacher_id group by s.student.id")
+    List<Student> getStudentsFromSessionBySubjectAndMarkAndTeacher(
+            @Param("subject_id") int subject_id,
+            @Param("mark") int mark,
+            @Param("teacher_id") int teacher_id);
+
 }
