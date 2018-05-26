@@ -82,4 +82,10 @@ public class StudentController {
         return studentService.getGreatStudentsByGroup(group_id);
     }
 
+    @GetMapping("/student/get who get more than one E by group")
+    List<Student> getStudentsWhoGetMoreThanOneEByGroup(@RequestParam("group_id") int group_id)
+    {
+        return studentService.getStudentsWhoGetMoreThanOneEByGroup(group_id);
+    }
+
 }

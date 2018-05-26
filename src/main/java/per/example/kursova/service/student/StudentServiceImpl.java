@@ -74,4 +74,9 @@ public class StudentServiceImpl implements IStudentService {
     public List<Student> getGreatStudentsByGroup(int group_id) {
         return studentRepository.getGreatStudentsByGroup(group_id);
     }
+
+    @Override
+    public List<Student> getStudentsWhoGetMoreThanOneEByGroup(int group_id) {
+        return studentRepository.getStudentsWhoGetMoreThanOneEByGroup(group_id);
+    }
 }

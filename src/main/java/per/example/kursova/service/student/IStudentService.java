@@ -19,4 +19,5 @@ public interface IStudentService {
     List<Student> getStudentsFromSessionByLesson(int subject_id);
     List<Student> getStudentsFromSessionByLessonAndMark(int subject_id, int mark);
     List<Student> getGreatStudentsByGroup(int group_id);
+    List<Student> getStudentsWhoGetMoreThanOneEByGroup(int group_id);
 }

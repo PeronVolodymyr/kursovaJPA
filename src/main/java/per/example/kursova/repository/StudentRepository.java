@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import per.example.kursova.model.Student;
 
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import java.util.List;
 
 public interface StudentRepository extends JpaRepository<Student, Integer>{
@@ -30,4 +33,9 @@ public interface StudentRepository extends JpaRepository<Student, Integer>{
     @Query("select s.student from Session s where s.student.id not in (" +
             "select s.student.id from Session s where s.mark < 4) and s.curriculum.group.id = :group_id group by s.student.id")
     List<Student> getGreatStudentsByGroup(@Param("group_id") int group_id);
+
+
+    @Query("select s.student from Session s where s.mark = 2 and s.curriculum.group.id = :group_id group by s.student having count(s.student) > 1")
+    List<Student> getStudentsWhoGetMoreThanOneEByGroup(@Param("group_id")int group_id);
+
 }
