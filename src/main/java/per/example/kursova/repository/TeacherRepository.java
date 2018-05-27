@@ -27,4 +27,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, Integer> {
 
     @Query("select d.teacher from Diploma d where d.teacher.chair.id = :chair_id")
     List<Teacher> getTeachersFromDiplomaByChair(@Param("chair_id") int chair_id);
+
+    @Query("select t from Teacher t where t.categoryOfTeacher.id = :categoryOfTeacher_id")
+    List<Teacher> getTeachersByCategoryOfTeacher(@Param("categoryOfTeacher_id") int categoryOfTeacher_id);
 }

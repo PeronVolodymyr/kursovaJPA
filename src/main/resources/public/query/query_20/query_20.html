@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../../assets/img/icon.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-    <title>Get number of teachers by lessons in the group</title>
+    <title>Get teachers by category</title>
 
     <!-- Google Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
@@ -47,7 +47,7 @@
 
 </head>
 
-<body ng-app="query_8">
+<body ng-app="query_20">
 
 <!-- Header -->
 <header class="top-head container-fluid navbar-fixed-top">
@@ -200,21 +200,39 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Одержати загальну кількість викладачів, що проводять лекційні, семінарські та інші види занять у вказаній групі
+                        Одержати перелік викладачів за вказаною кафедрою
                     </h3>
                     <hr>
-                    <select required class="form-control" type="text" name="group" id="group"></select><br>
-                    <button ng-click="ctrl.getNumberOfTeachersByLessonsInTheGroup()" type="button" class="btn btn-primary">Одержати</button>
+                    <select required class="form-control" type="text" name="category" id="category"></select><br>
+                    <button ng-click="ctrl.getTeachersByCategory()" type="button" class="btn btn-primary">Одержати</button>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
-                            <div class="col-sm-3 col-md-3 col-lg-3">
-                                <h3>Результат пошуку:</h3>
-                            </div>
-                            <div class="col-sm-1 col-md-1 col-lg-1">
-                                <h3 id="result"></h3>
-                            </div>
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>ПІБ</th>
+                                    <th>Дата народження</th>
+                                    <th>Кількість дітей</th>
+                                    <th>Зарплата</th>
+                                    <th>Категорія</th>
+                                    <th>Кафедра</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in teachers">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.dateOfBirth}}</td>
+                                    <td>{{item.countOfChildren}}</td>
+                                    <td>{{item.salary}}</td>
+                                    <td>{{item.categoryOfTeacher.category}}</td>
+                                    <td>{{item.chair.name}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -225,7 +243,7 @@
 </section>
 
 <script type="text/javascript" src="../../js/angular.min.js"></script>
-<script type="text/javascript" src="../../query/query_8/query_8.js"></script>
+<script type="text/javascript" src="../../query/query_20/query_20.js"></script>
 
 <!-- Basic Plugins -->
 <script src="../../assets/js/jquery-2.1.4.min.js"></script>

@@ -73,4 +73,9 @@ public class TeacherController {
     List<Teacher> getTeachersFromDiplomaByChair(@RequestParam("chair_id") int chair_id){
         return teacherService.getTeachersFromDiplomaByChair(chair_id);
     }
+
+    @GetMapping("/teacher/get by category")
+    List<Teacher> getTeachersByCategoryOfTeacher(@RequestParam("categoryOfTeacher_id") int categoryOfTeacher_id){
+        return teacherService.getTeachersByCategoryOfTeacher(categoryOfTeacher_id);
+    }
 }

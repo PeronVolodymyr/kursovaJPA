@@ -18,4 +18,5 @@ public interface ITeacherService {
     int getNumberOfTeachersByLessonsInTheGroup(int group_id);
     List<Teacher> getTeachersByExamInCurrentGroup(int group_id);
     List<Teacher> getTeachersFromDiplomaByChair(int chair_id);
+    List<Teacher> getTeachersByCategoryOfTeacher(int categoryOfTeacher_id);
 }

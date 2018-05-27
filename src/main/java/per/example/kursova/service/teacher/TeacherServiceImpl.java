@@ -72,4 +72,9 @@ public class TeacherServiceImpl implements ITeacherService {
     public List<Teacher> getTeachersFromDiplomaByChair(int chair_id) {
         return teacherRepository.getTeachersFromDiplomaByChair(chair_id);
     }
+
+    @Override
+    public List<Teacher> getTeachersByCategoryOfTeacher(int categoryOfTeacher_id) {
+        return teacherRepository.getTeachersByCategoryOfTeacher(categoryOfTeacher_id);
+    }
 }
