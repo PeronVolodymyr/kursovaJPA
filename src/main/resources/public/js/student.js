@@ -7,6 +7,11 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.students = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.startInsertStudent = function () {
         $http.get('/api/groups').then(function (response) {
             var groups = response.data;
@@ -54,24 +59,30 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexGroup= document.getElementById("group").selectedIndex;
         var groupId= document.getElementById("group").options[indexGroup].value;
 
-        $http.get('/api/group/get?id='+groupId).then(function (response) {
-            var selectedGroup = response.data;
-            var req = {
-                method: 'POST',
-                url: '/api/student/insert',
-                data: {
-                    name: name,
-                    dateOfBirth: dateOfBirth,
-                    children: childrenValue,
-                    scholarship: scholarship,
-                    group: selectedGroup
-                }
-            };
-            console.log(req);
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(name)) {
+            $http.get('/api/group/get?id=' + groupId).then(function (response) {
+                var selectedGroup = response.data;
+                var req = {
+                    method: 'POST',
+                    url: '/api/student/insert',
+                    data: {
+                        name: name,
+                        dateOfBirth: dateOfBirth,
+                        children: childrenValue,
+                        scholarship: scholarship,
+                        group: selectedGroup
+                    }
+                };
+                console.log(req);
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                })
+            });
+        }
+        else
+            window.alert("Введено некоректне ПІБ студента!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
     
     this.deleteStudent = function del(id) {
@@ -130,23 +141,29 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexGroup= document.getElementById("updateGroup").selectedIndex;
         var groupId= document.getElementById("updateGroup").options[indexGroup].value;
 
-        $http.get('/api/group/get?id='+groupId).then(function (response) {
-            var selectedGroup = response.data;
-            var req = {
-                method: 'POST',
-                url: 'api/student/update?id='+id,
-                data: {
-                    name: name,
-                    scholarship: scholarship,
-                    dateOfBirth: dateOfBirth,
-                    children: childrenValue,
-                    group: selectedGroup
-                }
-            };
-            console.log(req);
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(name)) {
+            $http.get('/api/group/get?id=' + groupId).then(function (response) {
+                var selectedGroup = response.data;
+                var req = {
+                    method: 'POST',
+                    url: 'api/student/update?id=' + id,
+                    data: {
+                        name: name,
+                        scholarship: scholarship,
+                        dateOfBirth: dateOfBirth,
+                        children: childrenValue,
+                        group: selectedGroup
+                    }
+                };
+                console.log(req);
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                })
+            });
+        }
+        else
+            window.alert("Введено некоректне ПІБ студента!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 });

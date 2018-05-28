@@ -8,6 +8,11 @@ app.controller("AppCtrl", function ($scope, $http) {
         // console.log(response);
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.startInsertChair= function () {
         $http.get('/api/departments').then(function (response) {
             var departments = response.data;
@@ -35,22 +40,35 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexDepartment= document.getElementById("department").selectedIndex;
         var departmentId = document.getElementById("department").options[indexDepartment].value;
 
-        $http.get('/api/department/get?id='+departmentId).then(function (response) {
-            var selectedDepartment= response.data;
-            var req = {
-                method: 'POST',
-                url: '/api/chair/insert',
-                data: {
-                    name: name,
-                    headOfChair: headOfChair,
-                    department: selectedDepartment
-                }
-            };
-            console.log(req);
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(name))
+        {
+            if(checkName(headOfChair)) {
+                $http.get('/api/department/get?id=' + departmentId).then(function (response) {
+                    var selectedDepartment = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/chair/insert',
+                        data: {
+                            name: name,
+                            headOfChair: headOfChair,
+                            department: selectedDepartment
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректне ПІБ завідувача кафедри!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
+        }
+        else
+            window.alert("Введено некоректну назву кафедри!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteChair = function del(id) {
@@ -87,20 +105,33 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexDepartment = document.getElementById("updateDepartment").selectedIndex;
         var departmentId = document.getElementById("updateDepartment").options[indexDepartment].value;
 
-        $http.get('/api/department/get?id='+departmentId).then(function (response) {
-            var selectedDepartment = response.data;
-            var req = {
-                method: 'POST',
-                url: 'api/chair/update?id='+id,
-                data: {
-                    name: name,
-                    headOfChair: headOfChair,
-                    department: selectedDepartment
-                }
-            };
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(name))
+        {
+            if(checkName(headOfChair)) {
+                $http.get('/api/department/get?id=' + departmentId).then(function (response) {
+                    var selectedDepartment = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: 'api/chair/update?id=' + id,
+                        data: {
+                            name: name,
+                            headOfChair: headOfChair,
+                            department: selectedDepartment
+                        }
+                    };
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректне ПІБ завідувача кафедри!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
+        }
+        else
+            window.alert("Введено некоректну назву кафедри!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 });

@@ -7,6 +7,11 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.subjects = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.startInsertSubject = function () {
         $http.get('/api/types of subject').then(function (response) {
             var typesOfSubject = response.data;
@@ -55,26 +60,32 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexFormOfControl = document.getElementById("formOfControl").selectedIndex;
         var formOfControlId= document.getElementById("formOfControl").options[indexFormOfControl].value;
 
-        $http.get('/api/type of subject/get?id='+ typeOfSubjectId).then(function (responseType) {
-            var selectedType= responseType.data;
-            $http.get('/api/form of control/get?id='+ formOfControlId).then(function (responseForm) {
-                var selectedForm= responseForm.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/subject/insert',
-                    data: {
-                        name: name,
-                        numberOfHours: numberOfHours,
-                        typeOfSubject: selectedType,
-                        formOfControl: selectedForm
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(checkName(name)) {
+            $http.get('/api/type of subject/get?id=' + typeOfSubjectId).then(function (responseType) {
+                var selectedType = responseType.data;
+                $http.get('/api/form of control/get?id=' + formOfControlId).then(function (responseForm) {
+                    var selectedForm = responseForm.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/subject/insert',
+                        data: {
+                            name: name,
+                            numberOfHours: numberOfHours,
+                            typeOfSubject: selectedType,
+                            formOfControl: selectedForm
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректну назву предмета!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteSubject= function del(id) {
@@ -128,25 +139,31 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexFormOfControl = document.getElementById("updateFormOfControl").selectedIndex;
         var formOfControlId= document.getElementById("updateFormOfControl").options[indexFormOfControl].value;
 
-        $http.get('/api/type of subject/get?id=' + typeOfSubjectId).then(function (responseType) {
-            var selectedType= responseType.data;
-            $http.get('/api/form of control/get?id=' + formOfControlId).then(function (responseForm) {
-                var selectedForm= responseForm.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/subject/update?id='+id,
-                    data: {
-                        name: name,
-                        numberOfHours: numberOfHours,
-                        typeOfSubject: selectedType,
-                        formOfControl: selectedForm
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(checkName(name)) {
+            $http.get('/api/type of subject/get?id=' + typeOfSubjectId).then(function (responseType) {
+                var selectedType = responseType.data;
+                $http.get('/api/form of control/get?id=' + formOfControlId).then(function (responseForm) {
+                    var selectedForm = responseForm.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/subject/update?id=' + id,
+                        data: {
+                            name: name,
+                            numberOfHours: numberOfHours,
+                            typeOfSubject: selectedType,
+                            formOfControl: selectedForm
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректну назву предмета!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 });

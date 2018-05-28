@@ -5,8 +5,12 @@ app.controller("AppCtrl", function ($scope, $http) {
     $scope.doctoralDissertations = [];
     $http.get('/api/doctoral dissertations').then(function (response) {
         $scope.doctoralDissertations = response.data;
-
     });
+
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
 
     this.startInsertDoctoralDissertation= function () {
         $http.get('/api/teachers').then(function (response) {
@@ -35,22 +39,28 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexTeacher= document.getElementById("teacher").selectedIndex;
         var teacherId = document.getElementById("teacher").options[indexTeacher].value;
 
-        $http.get('/api/teacher/get?id='+teacherId).then(function (response) {
-            var selectedTeacher= response.data;
-            var req = {
-                method: 'POST',
-                url: '/api/doctoral dissertation/insert',
-                data: {
-                    themeOfTheDissertation: themeOfTheDissertation,
-                    protectionDate: protectionDate,
-                    teacher: selectedTeacher
-                }
-            };
-            console.log(req);
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(themeOfTheDissertation)) {
+            $http.get('/api/teacher/get?id=' + teacherId).then(function (response) {
+                var selectedTeacher = response.data;
+                var req = {
+                    method: 'POST',
+                    url: '/api/doctoral dissertation/insert',
+                    data: {
+                        themeOfTheDissertation: themeOfTheDissertation,
+                        protectionDate: protectionDate,
+                        teacher: selectedTeacher
+                    }
+                };
+                console.log(req);
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                })
+            });
+        }
+        else
+            window.alert("Введено некоректну тему дисертації!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteDoctoralDissertation = function del(id) {
@@ -87,20 +97,26 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexTeacher= document.getElementById("updateTeacher").selectedIndex;
         var teacherId = document.getElementById("updateTeacher").options[indexTeacher].value;
 
-        $http.get('/api/teacher/get?id='+teacherId).then(function (response) {
-            var selectedTeacher = response.data;
-            var req = {
-                method: 'POST',
-                url: 'api/doctoral dissertation/update?id='+id,
-                data: {
-                    themeOfTheDissertation: themeOfTheDissertation,
-                    protectionDate: protectionDate,
-                    teacher: selectedTeacher
-                }
-            };
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(themeOfTheDissertation)) {
+            $http.get('/api/teacher/get?id=' + teacherId).then(function (response) {
+                var selectedTeacher = response.data;
+                var req = {
+                    method: 'POST',
+                    url: 'api/doctoral dissertation/update?id=' + id,
+                    data: {
+                        themeOfTheDissertation: themeOfTheDissertation,
+                        protectionDate: protectionDate,
+                        teacher: selectedTeacher
+                    }
+                };
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                })
+            });
+        }
+        else
+            window.alert("Введено некоректну тему дисертації!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 });

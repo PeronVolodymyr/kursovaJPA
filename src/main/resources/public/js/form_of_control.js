@@ -6,19 +6,30 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.formsOfControl = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.insertFormOfControl= function insert() {
         var form = document.getElementById("form").value;
-        var req = {
-            method: 'POST',
-            url: '/api/form of control/insert',
-            data: {
-                form: form
-            }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        })
+        if(checkName(form)) {
+            var req = {
+                method: 'POST',
+                url: '/api/form of control/insert',
+                data: {
+                    form: form
+                }
+            };
+            // console.log(req);
+            $http(req).then(function (resp) {
+                window.location.reload();
+            })
+        }
+        else
+            window.alert("Введено некоректну форму контролю!\n" +
+            "Початок сторки повинен починатися з великої літери.\n" +
+            "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteFormOfControl= function del(id) {
@@ -35,17 +46,23 @@ app.controller("AppCtrl", function ($scope, $http) {
     this.updateFormOfControl = function update() {
         var id = document.getElementById("updateId").innerText;
         var form = document.getElementById("updateForm").value;
-        var req = {
-            method: 'POST',
-            url: "/api/form of control/update?id="+id,
-            data: {
-                form: form
-            }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        });
+        if(checkName(form)) {
+            var req = {
+                method: 'POST',
+                url: "/api/form of control/update?id=" + id,
+                data: {
+                    form: form
+                }
+            };
+            // console.log(req);
+            $http(req).then(function (resp) {
+                window.location.reload();
+            });
+        }
+        else
+            window.alert("Введено некоректну форму контролю!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
 });

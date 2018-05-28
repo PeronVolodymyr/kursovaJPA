@@ -209,7 +209,7 @@
                                 <div class="card-body">
                                     <hr>
                                     <h4>Добавлення сесії:</h4>
-                                    <input class="form-control" type="text" name="mark" id="mark" placeholder="Оцінка"><br>
+                                    <input class="form-control" type="number" name="mark" id="mark" placeholder="Оцінка"><br>
                                     <select required class="form-control" type="text" name="student" id="student"></select><br>
                                     <select required class="form-control" type="text" name="curriculum" id="curriculum"></select><br>
                                     <button type="button" class="btn btn-primary" ng-click="ctrl.insertSession()">Добавити</button>
@@ -255,7 +255,7 @@
                                             <hr>
                                             <h4>Оновлення сесії:</h4>
                                             <h4> ID <div id="updateId"></div> </h4>
-                                            <input class="form-control" type="text" name="mark" id="updateMark" placeholder="Оцінка"><br>
+                                            <input class="form-control" type="number" name="mark" id="updateMark" placeholder="Оцінка"><br>
                                             <select required class="form-control" type="text" name="student" id="updateStudent"></select><br>
                                             <select required class="form-control" type="text" name="curriculum" id="updateCurriculum"></select><br>
                                             <button type="button" class="btn btn-primary" ng-click="ctrl.updateSession()">Оновити</button>

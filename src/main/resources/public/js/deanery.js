@@ -6,21 +6,41 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.deaneries = response.data;
     });
 
+    function checkAddress(str) {
+        var pattern = new RegExp(/^[А-ЯІа-яі][А-ЯІа-яі',.\-0-9 ]+$/);
+        return pattern.test(str);
+    }
+    function checkPhone(str) {
+        var pattern = new RegExp(/^[0-9]{10}$/);
+        return pattern.test(str);
+    }
+
     this.insertDeanery= function insert() {
         var address = document.getElementById("address").value;
         var phoneNumber = document.getElementById("phoneNumber").value;
-        var req = {
-            method: 'POST',
-            url: '/api/deanery/insert',
-            data: {
-                address: address,
-                phoneNumber: phoneNumber
+        if(checkAddress(address))
+        {
+            if(checkPhone(phoneNumber)) {
+                var req = {
+                    method: 'POST',
+                    url: '/api/deanery/insert',
+                    data: {
+                        address: address,
+                        phoneNumber: phoneNumber
+                    }
+                };
+                // console.log(req);
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                })
             }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        })
+            else
+                window.alert("Введено некоректний номер телефону!\n" +
+                    "Приклад: 0967809346");
+        }
+        else
+            window.alert("Введено некоректну адресу!\n" +
+                "Підтримуються літери українського алфавіту, цифри та символи: -  '  .  ,");
     };
 
     this.deleteDeanery= function del(id) {
@@ -39,18 +59,29 @@ app.controller("AppCtrl", function ($scope, $http) {
         var id = document.getElementById("updateId").innerText;
         var address = document.getElementById("updateAddress").value;
         var phoneNumber = document.getElementById("updatePhoneNumber").value;
-        var req = {
-            method: 'POST',
-            url: "/api/deanery/update?id="+id,
-            data: {
-                address: address,
-                phoneNumber: phoneNumber
+        if(checkAddress(address))
+        {
+            if(checkPhone(phoneNumber)) {
+                var req = {
+                    method: 'POST',
+                    url: "/api/deanery/update?id=" + id,
+                    data: {
+                        address: address,
+                        phoneNumber: phoneNumber
+                    }
+                };
+                // console.log(req);
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                });
             }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        });
+            else
+                window.alert("Введено некоректний номер телефону!\n" +
+                    "Приклад: 0967809346");
+        }
+        else
+            window.alert("Введено некоректну адресу!\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '  .  ,");
     };
 
 });

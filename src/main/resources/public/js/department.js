@@ -6,6 +6,11 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.departments = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.startInsertDepartment= function () {
         $http.get('/api/deaneries').then(function (response) {
             var deaneries = response.data;
@@ -33,21 +38,33 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexDeanery = document.getElementById("deanery").selectedIndex;
         var deaneryId = document.getElementById("deanery").options[indexDeanery].value;
 
-        $http.get('/api/deanery/get?id='+deaneryId).then(function (response) {
-            var selectedDeanery = response.data;
-            var req = {
-                method: 'POST',
-                url: '/api/department/insert',
-                data: {
-                    name: name,
-                    dean: dean,
-                    deanery: selectedDeanery
-                }
-            };
-            $http(req).then(function (resp) {
-            window.location.reload();
-            })
-        });
+        if(checkName(name)){
+            if(checkName(dean)) {
+                $http.get('/api/deanery/get?id=' + deaneryId).then(function (response) {
+                    var selectedDeanery = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/department/insert',
+                        data: {
+                            name: name,
+                            dean: dean,
+                            deanery: selectedDeanery
+                        }
+                    };
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректне ПІБ декана!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
+        }
+        else
+            window.alert("Введено некоректну назву факультету!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteDepartment = function del(id) {
@@ -84,21 +101,34 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexDeanery = document.getElementById("updateDeanery").selectedIndex;
         var deaneryId = document.getElementById("updateDeanery").options[indexDeanery].value;
 
-        $http.get('/api/deanery/get?id='+deaneryId).then(function (response) {
-            var selectedDeanery = selectedDeanery = response.data;
-            var req = {
-                method: 'POST',
-                url: 'api/department/update?id='+id,
-                data: {
-                    name: name,
-                    dean: dean,
-                    deanery: selectedDeanery
-                }
-            };
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(name))
+        {
+            if(checkName(dean)) {
+                $http.get('/api/deanery/get?id=' + deaneryId).then(function (response) {
+                    var selectedDeanery = selectedDeanery = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: 'api/department/update?id=' + id,
+                        data: {
+                            name: name,
+                            dean: dean,
+                            deanery: selectedDeanery
+                        }
+                    };
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректне ПІБ декана!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
+        }
+        else
+            window.alert("Введено некоректну назву факультету!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
 });

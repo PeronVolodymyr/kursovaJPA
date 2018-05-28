@@ -210,7 +210,7 @@
                                     <hr>
                                     <h4>Добавлення предмету:</h4>
                                     <input class="form-control" type="text" name="name" id="name" placeholder="Назва"><br>
-                                    <input class="form-control" type="text" name="numberOfHours" id="numberOfHours" placeholder="Кількість годин"><br>
+                                    <input class="form-control" type="number" name="numberOfHours" id="numberOfHours" placeholder="Кількість годин"><br>
                                     <select required class="form-control" type="text" name="typeOfSubject" id="typeOfSubject"></select><br>
                                     <select required class="form-control" type="text" name="formOfControl" id="formOfControl"></select><br>
                                     <button type="button" class="btn btn-primary" ng-click="ctrl.insertSubject()">Добавити</button>
@@ -255,7 +255,7 @@
                                             <h4>Оновлення предмету:</h4>
                                             <h4> ID <div id="updateId"></div> </h4>
                                             <input class="form-control" type="text" name="name" id="updateName" placeholder="Назва"><br>
-                                            <input class="form-control" type="text" name="numberOfHours" id="updateNumberOfHours" placeholder="Кількість годин"><br>
+                                            <input class="form-control" type="number" name="numberOfHours" id="updateNumberOfHours" placeholder="Кількість годин"><br>
                                             <select required class="form-control" type="text" name="typeOfSubject" id="updateTypeOfSubject"></select><br>
                                             <select required class="form-control" type="text" name="formOfControl" id="updateFormOfControl"></select><br>
                                             <button type="button" class="btn btn-primary" ng-click="ctrl.updateSubject()">Оновити</button>

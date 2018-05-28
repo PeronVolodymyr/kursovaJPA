@@ -7,6 +7,11 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.diplomas = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.startInsertDiploma = function () {
         $http.get('/api/teachers').then(function (response) {
             var teachers = response.data;
@@ -55,25 +60,31 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexStudent= document.getElementById("student").selectedIndex;
         var studentId= document.getElementById("student").options[indexStudent].value;
 
-        $http.get('/api/teacher/get?id='+ teacherId).then(function (responseTeacher) {
-            var selectedTeacher= responseTeacher.data;
-            $http.get('/api/student/get?id='+ studentId).then(function (responseStudent) {
-                var selectedStudent= responseStudent.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/diploma/insert',
-                    data: {
-                        themeOfDiploma: themeOfDiploma,
-                        teacher: selectedTeacher,
-                        student: selectedStudent
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(checkName(themeOfDiploma)) {
+            $http.get('/api/teacher/get?id=' + teacherId).then(function (responseTeacher) {
+                var selectedTeacher = responseTeacher.data;
+                $http.get('/api/student/get?id=' + studentId).then(function (responseStudent) {
+                    var selectedStudent = responseStudent.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/diploma/insert',
+                        data: {
+                            themeOfDiploma: themeOfDiploma,
+                            teacher: selectedTeacher,
+                            student: selectedStudent
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректну тему дипломної!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteDiploma = function del(id) {
@@ -126,25 +137,30 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexStudent= document.getElementById("updateStudent").selectedIndex;
         var studentId= document.getElementById("updateStudent").options[indexStudent].value;
 
-        $http.get('/api/teacher/get?id='+ teacherId).then(function (responseTeacher) {
-            var selectedTeacher= responseTeacher.data;
-            $http.get('/api/student/get?id='+ studentId).then(function (responseStudent) {
-                var selectedStudent= responseStudent.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/diploma/update?id=' + id,
-                    data: {
-                        themeOfDiploma: themeOfDiploma,
-                        teacher: selectedTeacher,
-                        student: selectedStudent
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(checkName(themeOfDiploma)) {
+            $http.get('/api/teacher/get?id=' + teacherId).then(function (responseTeacher) {
+                var selectedTeacher = responseTeacher.data;
+                $http.get('/api/student/get?id=' + studentId).then(function (responseStudent) {
+                    var selectedStudent = responseStudent.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/diploma/update?id=' + id,
+                        data: {
+                            themeOfDiploma: themeOfDiploma,
+                            teacher: selectedTeacher,
+                            student: selectedStudent
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректну тему дипломної!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
-
 });

@@ -7,6 +7,11 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.candidatesDissertations = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.startInsertCandidateDissertation= function () {
         $http.get('/api/teachers').then(function (response) {
             var teachers = response.data;
@@ -34,22 +39,28 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexTeacher= document.getElementById("teacher").selectedIndex;
         var teacherId = document.getElementById("teacher").options[indexTeacher].value;
 
-        $http.get('/api/teacher/get?id='+teacherId).then(function (response) {
-            var selectedTeacher= response.data;
-            var req = {
-                method: 'POST',
-                url: '/api/candidate dissertation/insert',
-                data: {
-                    themeOfTheDissertation: themeOfTheDissertation,
-                    protectionDate: protectionDate,
-                    teacher: selectedTeacher
-                }
-            };
-            console.log(req);
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(themeOfTheDissertation)) {
+            $http.get('/api/teacher/get?id=' + teacherId).then(function (response) {
+                var selectedTeacher = response.data;
+                var req = {
+                    method: 'POST',
+                    url: '/api/candidate dissertation/insert',
+                    data: {
+                        themeOfTheDissertation: themeOfTheDissertation,
+                        protectionDate: protectionDate,
+                        teacher: selectedTeacher
+                    }
+                };
+                console.log(req);
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                })
+            });
+        }
+        else
+            window.alert("Введено некоректну тему дисертації!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteCandidateDissertation = function del(id) {
@@ -86,20 +97,26 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexTeacher= document.getElementById("updateTeacher").selectedIndex;
         var teacherId = document.getElementById("updateTeacher").options[indexTeacher].value;
 
-        $http.get('/api/teacher/get?id='+teacherId).then(function (response) {
-            var selectedTeacher = response.data;
-            var req = {
-                method: 'POST',
-                url: 'api/candidate dissertation/update?id='+id,
-                data: {
-                    themeOfTheDissertation: themeOfTheDissertation,
-                    protectionDate: protectionDate,
-                    teacher: selectedTeacher
-                }
-            };
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(checkName(themeOfTheDissertation)) {
+            $http.get('/api/teacher/get?id=' + teacherId).then(function (response) {
+                var selectedTeacher = response.data;
+                var req = {
+                    method: 'POST',
+                    url: 'api/candidate dissertation/update?id=' + id,
+                    data: {
+                        themeOfTheDissertation: themeOfTheDissertation,
+                        protectionDate: protectionDate,
+                        teacher: selectedTeacher
+                    }
+                };
+                $http(req).then(function (resp) {
+                    window.location.reload();
+                })
+            });
+        }
+        else
+            window.alert("Введено некоректну тему дисертації!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 });

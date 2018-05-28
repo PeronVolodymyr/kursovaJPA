@@ -7,6 +7,11 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.teachers = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.startInsertTeacher = function () {
         $http.get('/api/chairs').then(function (response) {
             var chairs = response.data;
@@ -56,29 +61,34 @@ app.controller("AppCtrl", function ($scope, $http) {
 
         var indexChair= document.getElementById("chair").selectedIndex;
         var chairId= document.getElementById("chair").options[indexChair].value;
-
-        $http.get('/api/category of teacher/get?id='+categoryOfTeacherId).then(function (responseCategory) {
-            var selectedCategory= responseCategory.data;
-            $http.get('/api/chair/get?id='+chairId).then(function (responseChair) {
-                var selectedChair= responseChair.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/teacher/insert',
-                    data: {
-                        name: name,
-                        dateOfBirth: dateOfBirth,
-                        countOfChildren: countOfChildren,
-                        salary: salary,
-                        categoryOfTeacher: selectedCategory,
-                        chair: selectedChair
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(checkName(name)) {
+            $http.get('/api/category of teacher/get?id=' + categoryOfTeacherId).then(function (responseCategory) {
+                var selectedCategory = responseCategory.data;
+                $http.get('/api/chair/get?id=' + chairId).then(function (responseChair) {
+                    var selectedChair = responseChair.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/teacher/insert',
+                        data: {
+                            name: name,
+                            dateOfBirth: dateOfBirth,
+                            countOfChildren: countOfChildren,
+                            salary: salary,
+                            categoryOfTeacher: selectedCategory,
+                            chair: selectedChair
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректний ПІБ викладача!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteTeacher= function del(id) {
@@ -136,27 +146,33 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexChair= document.getElementById("updateChair").selectedIndex;
         var chairId= document.getElementById("updateChair").options[indexChair].value;
 
-        $http.get('/api/category of teacher/get?id='+categoryOfTeacherId).then(function (responseCategory) {
-            var selectedCategory= responseCategory.data;
-            $http.get('/api/chair/get?id='+chairId).then(function (responseChair) {
-                var selectedChair= responseChair.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/teacher/update?id='+id,
-                    data: {
-                        name: name,
-                        dateOfBirth: dateOfBirth,
-                        countOfChildren: countOfChildren,
-                        salary: salary,
-                        categoryOfTeacher: selectedCategory,
-                        chair: selectedChair
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(checkName(name)) {
+            $http.get('/api/category of teacher/get?id=' + categoryOfTeacherId).then(function (responseCategory) {
+                var selectedCategory = responseCategory.data;
+                $http.get('/api/chair/get?id=' + chairId).then(function (responseChair) {
+                    var selectedChair = responseChair.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/teacher/update?id=' + id,
+                        data: {
+                            name: name,
+                            dateOfBirth: dateOfBirth,
+                            countOfChildren: countOfChildren,
+                            salary: salary,
+                            categoryOfTeacher: selectedCategory,
+                            chair: selectedChair
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректне ПІБ викладача!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 });

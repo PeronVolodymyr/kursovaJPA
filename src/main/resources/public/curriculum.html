@@ -210,7 +210,7 @@
                                     <hr>
                                     <h4>Добавлення розкладу:</h4>
                                     <select required class="form-control" type="text" name="teacher" id="teacher"></select><br>
-                                    <input class="form-control" type="text" name="semester" id="semester" placeholder="Семестер"><br>
+                                    <input class="form-control" type="number" name="semester" id="semester" placeholder="Семестер"><br>
                                     <select required class="form-control" type="text" name="subject" id="subject"></select><br>
                                     <select required class="form-control" type="text" name="group" id="group"></select><br>
                                     <button type="button" class="btn btn-primary" ng-click="ctrl.insertCurriculum()">Добавити</button>
@@ -261,7 +261,7 @@
                                             <h4>Оновлення розкладу:</h4>
                                             <h4> ID <div id="updateId"></div> </h4>
                                             <select required class="form-control" type="text" name="teacher" id="updateTeacher"></select><br>
-                                            <input class="form-control" type="text" name="semester" id="updateSemester" placeholder="Семестер"><br>
+                                            <input class="form-control" type="number" name="semester" id="updateSemester" placeholder="Семестер"><br>
                                             <select required class="form-control" type="text" name="subject" id="updateSubject"></select><br>
                                             <select required class="form-control" type="text" name="group" id="updateGroup"></select><br>
                                             <button type="button" class="btn btn-primary" ng-click="ctrl.updateCurriculum()">Оновити</button>

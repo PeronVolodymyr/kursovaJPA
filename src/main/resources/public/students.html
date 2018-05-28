@@ -212,7 +212,7 @@
                                     <input class="form-control" type="text" name="name" id="name" placeholder="ПІБ"><br>
                                     <input class="form-control" type="text" onfocus="(this.type='date')" name="dateOfBirth" id="dateOfBirth" placeholder="Дата народження"><br>
                                     <select required class="form-control" type="text" name="children" id="children"></select><br>
-                                    <input class="form-control" type="text" name="scholarship" id="scholarship" placeholder="Розмір стипендії"><br>
+                                    <input class="form-control" type="number" name="scholarship" id="scholarship" placeholder="Розмір стипендії"><br>
                                     <select required class="form-control" type="text" name="group" id="group"></select><br>
                                     <button type="button" class="btn btn-primary" ng-click="ctrl.insertStudent()">Добавити</button>
                                     <br>
@@ -260,7 +260,7 @@
                                             <input class="form-control" type="text" name="name" id="updateName"><br>
                                             <input class="form-control" type="date" name="dateOfBirth" id="updateDateOfBirth"><br>
                                             <select class="form-control" type="text" name="children" id="updateChildren"></select><br>
-                                            <input class="form-control" type="text" name="scholarship" id="updateScholarship"><br>
+                                            <input class="form-control" type="number" name="scholarship" id="updateScholarship"><br>
                                             <select class="form-control" type="text" name="group" id="updateGroup"></select><br>
                                             <button type="button" class="btn btn-primary" ng-click="ctrl.updateStudent()">Оновити</button>
                                             <br>

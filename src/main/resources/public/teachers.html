@@ -211,8 +211,8 @@
                                     <h4>Добавлення викладача:</h4>
                                     <input class="form-control" type="text" name="name" id="name" placeholder="ПІБ"><br>
                                     <input class="form-control" type="text" onfocus="(this.type='date')" name="dateOfBirth" id="dateOfBirth" placeholder="Дата народження"><br>
-                                    <input class="form-control" type="text" name="countOfChildren" id="countOfChildren" placeholder="Кількість дітей"><br>
-                                    <input class="form-control" type="text" name="salary" id="salary" placeholder="Зарплата"><br>
+                                    <input class="form-control" type="number" name="countOfChildren" id="countOfChildren" placeholder="Кількість дітей"><br>
+                                    <input class="form-control" type="number" name="salary" id="salary" placeholder="Зарплата"><br>
                                     <select required class="form-control" type="text" name="categoryOfTeacher" id="categoryOfTeacher"></select><br>
                                     <select required class="form-control" type="text" name="chair" id="chair"></select><br>
                                     <button type="button" class="btn btn-primary" ng-click="ctrl.insertTeacher()">Добавити</button>
@@ -262,8 +262,8 @@
                                             <h4> ID <div id="updateId"></div> </h4>
                                             <input class="form-control" type="text" name="name" id="updateName"><br>
                                             <input class="form-control" type="date" name="dateOfBirth" id="updateDateOfBirth"><br>
-                                            <input class="form-control" type="text" name="countOfChildren" id="updateCountOfChildren" placeholder="Кількість дітей"><br>
-                                            <input class="form-control" type="text" name="salary" id="updateSalary" placeholder="Зарплата"><br>
+                                            <input class="form-control" type="number" name="countOfChildren" id="updateCountOfChildren" placeholder="Кількість дітей"><br>
+                                            <input class="form-control" type="number" name="salary" id="updateSalary" placeholder="Зарплата"><br>
                                             <select required class="form-control" type="text" name="categoryOfTeacher" id="updateCategoryOfTeacher"></select><br>
                                             <select required class="form-control" type="text" name="chair" id="updateChair"></select><br>
                                             <button type="button" class="btn btn-primary" ng-click="ctrl.updateTeacher()">Оновити</button>

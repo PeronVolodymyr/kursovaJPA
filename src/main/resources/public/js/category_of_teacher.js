@@ -6,19 +6,30 @@ app.controller("AppCtrl", function ($scope, $http) {
         $scope.categoriesOfTeacher = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.insertCategoryOfTeacher = function insert() {
         var category = document.getElementById("category").value;
-        var req = {
-            method: 'POST',
-            url: '/api/category of teacher/insert',
-            data: {
-                category: category
-            }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        })
+        if(checkName(category)) {
+            var req = {
+                method: 'POST',
+                url: '/api/category of teacher/insert',
+                data: {
+                    category: category
+                }
+            };
+            // console.log(req);
+            $http(req).then(function (resp) {
+                window.location.reload();
+            })
+        }
+        else
+            window.alert("Введено некоректну форму контролю!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
     this.deleteCategoryOfTeacher = function del(id) {
@@ -35,17 +46,23 @@ app.controller("AppCtrl", function ($scope, $http) {
     this.updateCategoryOfTeacher = function update() {
         var id = document.getElementById("updateId").innerText;
         var category = document.getElementById("updateCategory").value;
-        var req = {
-            method: 'POST',
-            url: "/api/category of teacher/update?id="+id,
-            data: {
-                category: category
-            }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        });
+        if(checkName(category)) {
+            var req = {
+                method: 'POST',
+                url: "/api/category of teacher/update?id=" + id,
+                data: {
+                    category: category
+                }
+            };
+            // console.log(req);
+            $http(req).then(function (resp) {
+                window.location.reload();
+            });
+        }
+        else
+            window.alert("Введено некоректну форму контролю!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 
 });

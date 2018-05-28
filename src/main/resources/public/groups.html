@@ -209,8 +209,8 @@
                                 <div class="card-body">
                                     <hr>
                                     <h4>Добавлення групи:</h4>
-                                    <input class="form-control" type="text" name="number" id="number" placeholder="Номер групи"><br>
-                                    <input class="form-control" type="text" name="course" id="course" placeholder="Курс"><br>
+                                    <input class="form-control" type="number" name="number" id="number" placeholder="Номер групи"><br>
+                                    <input class="form-control" type="number" name="course" id="course" placeholder="Курс"><br>
                                     <select required class="form-control" type="text" name="chair" id="chair"></select><br>
                                     <button type="button" class="btn btn-primary" ng-click="ctrl.insertGroup()">Добавити</button>
                                     <br>
@@ -251,8 +251,8 @@
                                             <hr>
                                             <h4>Оновлення групи:</h4>
                                             <h4> ID <div id="updateId"></div> </h4>
-                                            <input class="form-control" type="text" name="number" id="updateNumber"><br>
-                                            <input class="form-control" type="text" name="course" id="updateCourse"><br>
+                                            <input class="form-control" type="number" name="number" id="updateNumber"><br>
+                                            <input class="form-control" type="number" name="course" id="updateCourse"><br>
                                             <select class="form-control" type="text" name="chair" id="updateChair"></select><br>
                                             <button type="button" class="btn btn-primary" ng-click="ctrl.updateGroup()">Оновити</button>
                                             <br>

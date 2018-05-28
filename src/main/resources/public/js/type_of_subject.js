@@ -5,19 +5,30 @@ app.controller("TypeOfSubject", function ($scope, $http) {
         $scope.typesOfSubject = response.data;
     });
 
+    function checkName(str) {
+        var pattern = new RegExp(/^[А-ЯІ][А-ЯІа-яі'\- ]+$/);
+        return pattern.test(str);
+    }
+
     this.insertTypeOfSubject= function ins() {
         var type = document.getElementById("type").value;
-        var req = {
-            method: 'POST',
-            url: '/api/type of subject/insert',
-            data: {
-                type: type
-            }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        });
+        if(checkName(type)) {
+            var req = {
+                method: 'POST',
+                url: '/api/type of subject/insert',
+                data: {
+                    type: type
+                }
+            };
+            // console.log(req);
+            $http(req).then(function (resp) {
+                window.location.reload();
+            });
+        }
+        else
+            window.alert("Введено некоректний тип предмету!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
         // //incorect(delete do not work)
         // $scope.typesOfSubject.push({
         //     type: type
@@ -39,16 +50,22 @@ app.controller("TypeOfSubject", function ($scope, $http) {
     this.updateTypeOfSubject= function update() {
         var id = document.getElementById("updateId").innerText;
         var type = document.getElementById("updateType").value;
-        var req = {
-            method: 'POST',
-            url: "/api/type of subject/update?id="+id,
-            data: {
-                type: type
-            }
-        };
-        // console.log(req);
-        $http(req).then(function (resp) {
-            window.location.reload();
-        });
+        if(checkName(type)) {
+            var req = {
+                method: 'POST',
+                url: "/api/type of subject/update?id=" + id,
+                data: {
+                    type: type
+                }
+            };
+            // console.log(req);
+            $http(req).then(function (resp) {
+                window.location.reload();
+            });
+        }
+        else
+            window.alert("Введено некоректний тип предмету!\n" +
+                "Початок сторки повинен починатися з великої літери.\n" +
+                "Підтримуються літери українського алфавіту та символи: -  '");
     };
 });
