@@ -61,34 +61,45 @@ app.controller("AppCtrl", function ($scope, $http) {
 
         var indexChair= document.getElementById("chair").selectedIndex;
         var chairId= document.getElementById("chair").options[indexChair].value;
-        if(checkName(name)) {
-            $http.get('/api/category of teacher/get?id=' + categoryOfTeacherId).then(function (responseCategory) {
-                var selectedCategory = responseCategory.data;
-                $http.get('/api/chair/get?id=' + chairId).then(function (responseChair) {
-                    var selectedChair = responseChair.data;
-                    var req = {
-                        method: 'POST',
-                        url: '/api/teacher/insert',
-                        data: {
-                            name: name,
-                            dateOfBirth: dateOfBirth,
-                            countOfChildren: countOfChildren,
-                            salary: salary,
-                            categoryOfTeacher: selectedCategory,
-                            chair: selectedChair
-                        }
-                    };
-                    console.log(req);
-                    $http(req).then(function (resp) {
-                        window.location.reload();
-                    })
-                });
-            });
+        if(salary > 0)
+        {
+            if(countOfChildren >= 0) {
+                if (checkName(name)) {
+                    $http.get('/api/category of teacher/get?id=' + categoryOfTeacherId).then(function (responseCategory) {
+                        var selectedCategory = responseCategory.data;
+                        $http.get('/api/chair/get?id=' + chairId).then(function (responseChair) {
+                            var selectedChair = responseChair.data;
+                            var req = {
+                                method: 'POST',
+                                url: '/api/teacher/insert',
+                                data: {
+                                    name: name,
+                                    dateOfBirth: dateOfBirth,
+                                    countOfChildren: countOfChildren,
+                                    salary: salary,
+                                    categoryOfTeacher: selectedCategory,
+                                    chair: selectedChair
+                                }
+                            };
+                            console.log(req);
+                            $http(req).then(function (resp) {
+                                window.location.reload();
+                            })
+                        });
+                    });
+                }
+                else
+                    window.alert("Введено некоректний ПІБ викладача!\n" +
+                        "Початок сторки повинен починатися з великої літери.\n" +
+                        "Підтримуються літери українського алфавіту та символи: -  '");
+            }
+            else
+                window.alert("Введено некоректну кількість дітей!\n" +
+                    "Підтримуються всі додатні цифри.");
         }
         else
-            window.alert("Введено некоректний ПІБ викладача!\n" +
-                "Початок сторки повинен починатися з великої літери.\n" +
-                "Підтримуються літери українського алфавіту та символи: -  '");
+            window.alert("Введено некоректну зарплату!\n" +
+                "Підтримуються всі додатні цифри.");
     };
 
     this.deleteTeacher= function del(id) {
@@ -146,33 +157,44 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexChair= document.getElementById("updateChair").selectedIndex;
         var chairId= document.getElementById("updateChair").options[indexChair].value;
 
-        if(checkName(name)) {
-            $http.get('/api/category of teacher/get?id=' + categoryOfTeacherId).then(function (responseCategory) {
-                var selectedCategory = responseCategory.data;
-                $http.get('/api/chair/get?id=' + chairId).then(function (responseChair) {
-                    var selectedChair = responseChair.data;
-                    var req = {
-                        method: 'POST',
-                        url: '/api/teacher/update?id=' + id,
-                        data: {
-                            name: name,
-                            dateOfBirth: dateOfBirth,
-                            countOfChildren: countOfChildren,
-                            salary: salary,
-                            categoryOfTeacher: selectedCategory,
-                            chair: selectedChair
-                        }
-                    };
-                    console.log(req);
-                    $http(req).then(function (resp) {
-                        window.location.reload();
-                    })
-                });
-            });
+        if(salary > 0)
+        {
+            if(countOfChildren >= 0) {
+                if (checkName(name)) {
+                    $http.get('/api/category of teacher/get?id=' + categoryOfTeacherId).then(function (responseCategory) {
+                        var selectedCategory = responseCategory.data;
+                        $http.get('/api/chair/get?id=' + chairId).then(function (responseChair) {
+                            var selectedChair = responseChair.data;
+                            var req = {
+                                method: 'POST',
+                                url: '/api/teacher/update?id=' + id,
+                                data: {
+                                    name: name,
+                                    dateOfBirth: dateOfBirth,
+                                    countOfChildren: countOfChildren,
+                                    salary: salary,
+                                    categoryOfTeacher: selectedCategory,
+                                    chair: selectedChair
+                                }
+                            };
+                            console.log(req);
+                            $http(req).then(function (resp) {
+                                window.location.reload();
+                            })
+                        });
+                    });
+                }
+                else
+                    window.alert("Введено некоректне ПІБ викладача!\n" +
+                        "Початок сторки повинен починатися з великої літери.\n" +
+                        "Підтримуються літери українського алфавіту та символи: -  '");
+            }
+            else
+                window.alert("Введено некоректну кількість дітей!\n" +
+                    "Підтримуються всі додатні цифри.");
         }
         else
-            window.alert("Введено некоректне ПІБ викладача!\n" +
-                "Початок сторки повинен починатися з великої літери.\n" +
-                "Підтримуються літери українського алфавіту та символи: -  '");
+            window.alert("Введено некоректну зарплату!\n" +
+                "Підтримуються всі додатні цифри.");
     };
 });

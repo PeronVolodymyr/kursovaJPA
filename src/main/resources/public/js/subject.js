@@ -60,32 +60,37 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexFormOfControl = document.getElementById("formOfControl").selectedIndex;
         var formOfControlId= document.getElementById("formOfControl").options[indexFormOfControl].value;
 
-        if(checkName(name)) {
-            $http.get('/api/type of subject/get?id=' + typeOfSubjectId).then(function (responseType) {
-                var selectedType = responseType.data;
-                $http.get('/api/form of control/get?id=' + formOfControlId).then(function (responseForm) {
-                    var selectedForm = responseForm.data;
-                    var req = {
-                        method: 'POST',
-                        url: '/api/subject/insert',
-                        data: {
-                            name: name,
-                            numberOfHours: numberOfHours,
-                            typeOfSubject: selectedType,
-                            formOfControl: selectedForm
-                        }
-                    };
-                    console.log(req);
-                    $http(req).then(function (resp) {
-                        window.location.reload();
-                    })
+        if(numberOfHours > 0) {
+            if (checkName(name)) {
+                $http.get('/api/type of subject/get?id=' + typeOfSubjectId).then(function (responseType) {
+                    var selectedType = responseType.data;
+                    $http.get('/api/form of control/get?id=' + formOfControlId).then(function (responseForm) {
+                        var selectedForm = responseForm.data;
+                        var req = {
+                            method: 'POST',
+                            url: '/api/subject/insert',
+                            data: {
+                                name: name,
+                                numberOfHours: numberOfHours,
+                                typeOfSubject: selectedType,
+                                formOfControl: selectedForm
+                            }
+                        };
+                        console.log(req);
+                        $http(req).then(function (resp) {
+                            window.location.reload();
+                        })
+                    });
                 });
-            });
+            }
+            else
+                window.alert("Введено некоректну назву предмета!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
         }
         else
-            window.alert("Введено некоректну назву предмета!\n" +
-                "Початок сторки повинен починатися з великої літери.\n" +
-                "Підтримуються літери українського алфавіту та символи: -  '");
+            window.alert("Введено некоректну кількість годин!\n" +
+                "Підтримуються всі додатні цифри");
     };
 
     this.deleteSubject= function del(id) {
@@ -139,31 +144,36 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexFormOfControl = document.getElementById("updateFormOfControl").selectedIndex;
         var formOfControlId= document.getElementById("updateFormOfControl").options[indexFormOfControl].value;
 
-        if(checkName(name)) {
-            $http.get('/api/type of subject/get?id=' + typeOfSubjectId).then(function (responseType) {
-                var selectedType = responseType.data;
-                $http.get('/api/form of control/get?id=' + formOfControlId).then(function (responseForm) {
-                    var selectedForm = responseForm.data;
-                    var req = {
-                        method: 'POST',
-                        url: '/api/subject/update?id=' + id,
-                        data: {
-                            name: name,
-                            numberOfHours: numberOfHours,
-                            typeOfSubject: selectedType,
-                            formOfControl: selectedForm
-                        }
-                    };
-                    console.log(req);
-                    $http(req).then(function (resp) {
-                        window.location.reload();
-                    })
+        if(numberOfHours > 0) {
+            if (checkName(name)) {
+                $http.get('/api/type of subject/get?id=' + typeOfSubjectId).then(function (responseType) {
+                    var selectedType = responseType.data;
+                    $http.get('/api/form of control/get?id=' + formOfControlId).then(function (responseForm) {
+                        var selectedForm = responseForm.data;
+                        var req = {
+                            method: 'POST',
+                            url: '/api/subject/update?id=' + id,
+                            data: {
+                                name: name,
+                                numberOfHours: numberOfHours,
+                                typeOfSubject: selectedType,
+                                formOfControl: selectedForm
+                            }
+                        };
+                        console.log(req);
+                        $http(req).then(function (resp) {
+                            window.location.reload();
+                        })
+                    });
                 });
-            });
+            }
+            else
+                window.alert("Введено некоректну назву предмета!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
         }
         else
-            window.alert("Введено некоректну назву предмета!\n" +
-                "Початок сторки повинен починатися з великої літери.\n" +
-                "Підтримуються літери українського алфавіту та символи: -  '");
+            window.alert("Введено некоректну кількість годин!\n" +
+                "Підтримуються всі додатні цифри");
     };
 });

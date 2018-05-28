@@ -58,31 +58,35 @@ app.controller("AppCtrl", function ($scope, $http) {
 
         var indexGroup= document.getElementById("group").selectedIndex;
         var groupId= document.getElementById("group").options[indexGroup].value;
-
-        if(checkName(name)) {
-            $http.get('/api/group/get?id=' + groupId).then(function (response) {
-                var selectedGroup = response.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/student/insert',
-                    data: {
-                        name: name,
-                        dateOfBirth: dateOfBirth,
-                        children: childrenValue,
-                        scholarship: scholarship,
-                        group: selectedGroup
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
-            });
+        if(scholarship > 0) {
+            if (checkName(name)) {
+                $http.get('/api/group/get?id=' + groupId).then(function (response) {
+                    var selectedGroup = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/student/insert',
+                        data: {
+                            name: name,
+                            dateOfBirth: dateOfBirth,
+                            children: childrenValue,
+                            scholarship: scholarship,
+                            group: selectedGroup
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректне ПІБ студента!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
         }
         else
-            window.alert("Введено некоректне ПІБ студента!\n" +
-                "Початок сторки повинен починатися з великої літери.\n" +
-                "Підтримуються літери українського алфавіту та символи: -  '");
+            window.alert("Введено некоректну стипендію!\n" +
+                "Підтримується люба додатня сума");
     };
     
     this.deleteStudent = function del(id) {
@@ -141,29 +145,34 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexGroup= document.getElementById("updateGroup").selectedIndex;
         var groupId= document.getElementById("updateGroup").options[indexGroup].value;
 
-        if(checkName(name)) {
-            $http.get('/api/group/get?id=' + groupId).then(function (response) {
-                var selectedGroup = response.data;
-                var req = {
-                    method: 'POST',
-                    url: 'api/student/update?id=' + id,
-                    data: {
-                        name: name,
-                        scholarship: scholarship,
-                        dateOfBirth: dateOfBirth,
-                        children: childrenValue,
-                        group: selectedGroup
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
-            });
+        if(scholarship > 0) {
+            if (checkName(name)) {
+                $http.get('/api/group/get?id=' + groupId).then(function (response) {
+                    var selectedGroup = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: 'api/student/update?id=' + id,
+                        data: {
+                            name: name,
+                            scholarship: scholarship,
+                            dateOfBirth: dateOfBirth,
+                            children: childrenValue,
+                            group: selectedGroup
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректне ПІБ студента!\n" +
+                    "Початок сторки повинен починатися з великої літери.\n" +
+                    "Підтримуються літери українського алфавіту та символи: -  '");
         }
         else
-            window.alert("Введено некоректне ПІБ студента!\n" +
-                "Початок сторки повинен починатися з великої літери.\n" +
-                "Підтримуються літери українського алфавіту та символи: -  '");
+            window.alert("Введено некоректну стипендію!\n" +
+            "Підтримується люба додатня сума");
     };
 });

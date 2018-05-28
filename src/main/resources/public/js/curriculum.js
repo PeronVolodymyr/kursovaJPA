@@ -78,29 +78,34 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexGroup = document.getElementById("group").selectedIndex;
         var groupId= document.getElementById("group").options[indexGroup].value;
 
-        $http.get('/api/group/get?id='+ groupId).then(function (responseGroup) {
-            var selectedGroup= responseGroup.data;
-            $http.get('/api/teacher/get?id='+ teacherId).then(function (responseTeacher) {
-                var selectedTeacher= responseTeacher.data;
-                $http.get('/api/subject/get?id='+ subjectId).then(function (responseSubject) {
-                    var selectedSubject= responseSubject.data;
-                    var req = {
-                        method: 'POST',
-                        url: '/api/curriculum/insert',
-                        data: {
-                            semester: semester,
-                            teacher: selectedTeacher,
-                            subject: selectedSubject,
-                            group: selectedGroup
-                        }
-                    };
-                    console.log(req);
-                    $http(req).then(function (resp) {
-                        window.location.reload();
-                    })
+        if(semester > 0 && semester < 3) {
+            $http.get('/api/group/get?id=' + groupId).then(function (responseGroup) {
+                var selectedGroup = responseGroup.data;
+                $http.get('/api/teacher/get?id=' + teacherId).then(function (responseTeacher) {
+                    var selectedTeacher = responseTeacher.data;
+                    $http.get('/api/subject/get?id=' + subjectId).then(function (responseSubject) {
+                        var selectedSubject = responseSubject.data;
+                        var req = {
+                            method: 'POST',
+                            url: '/api/curriculum/insert',
+                            data: {
+                                semester: semester,
+                                teacher: selectedTeacher,
+                                subject: selectedSubject,
+                                group: selectedGroup
+                            }
+                        };
+                        console.log(req);
+                        $http(req).then(function (resp) {
+                            window.location.reload();
+                        })
+                    });
                 });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректний семестер!\n" +
+                "Коректний семестер в межах 1-2 включно.");
     };
 
     this.deleteCurriculum = function del(id) {
@@ -173,29 +178,34 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexGroup = document.getElementById("updateGroup").selectedIndex;
         var groupId= document.getElementById("updateGroup").options[indexGroup].value;
 
-        $http.get('/api/group/get?id='+ groupId).then(function (responseGroup) {
-            var selectedGroup= responseGroup.data;
-            $http.get('/api/teacher/get?id='+ teacherId).then(function (responseTeacher) {
-                var selectedTeacher= responseTeacher.data;
-                $http.get('/api/subject/get?id='+ subjectId).then(function (responseSubject) {
-                    var selectedSubject= responseSubject.data;
-                    var req = {
-                        method: 'POST',
-                        url: '/api/curriculum/update?id=' + id,
-                        data: {
-                            semester: semester,
-                            teacher: selectedTeacher,
-                            subject: selectedSubject,
-                            group: selectedGroup
-                        }
-                    };
-                    console.log(req);
-                    $http(req).then(function (resp) {
-                        window.location.reload();
-                    })
+        if(semester > 0 && semester < 3) {
+            $http.get('/api/group/get?id=' + groupId).then(function (responseGroup) {
+                var selectedGroup = responseGroup.data;
+                $http.get('/api/teacher/get?id=' + teacherId).then(function (responseTeacher) {
+                    var selectedTeacher = responseTeacher.data;
+                    $http.get('/api/subject/get?id=' + subjectId).then(function (responseSubject) {
+                        var selectedSubject = responseSubject.data;
+                        var req = {
+                            method: 'POST',
+                            url: '/api/curriculum/update?id=' + id,
+                            data: {
+                                semester: semester,
+                                teacher: selectedTeacher,
+                                subject: selectedSubject,
+                                group: selectedGroup
+                            }
+                        };
+                        console.log(req);
+                        $http(req).then(function (resp) {
+                            window.location.reload();
+                        })
+                    });
                 });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректний семестер!\n" +
+                "Коректний семестер в межах 1-2 включно.");
     };
 
 });

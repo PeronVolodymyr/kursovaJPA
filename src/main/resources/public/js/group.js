@@ -34,22 +34,32 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexChair= document.getElementById("chair").selectedIndex;
         var chairId = document.getElementById("chair").options[indexChair].value;
 
-        $http.get('/api/chair/get?id='+chairId).then(function (response) {
-            var selectedChair = response.data;
-            var req = {
-                method: 'POST',
-                url: '/api/group/insert',
-                data: {
-                    number: number,
-                    course: course,
-                    chair: selectedChair
-                }
-            };
-            console.log(req);
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(number > 0) {
+            if(course > 0 && course < 7) {
+                $http.get('/api/chair/get?id=' + chairId).then(function (response) {
+                    var selectedChair = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/group/insert',
+                        data: {
+                            number: number,
+                            course: course,
+                            chair: selectedChair
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректний курс!\n" +
+                    "Курс може бути в межах 1-6 включно.");
+        }
+        else
+            window.alert("Введено некоректний номер групи!\n" +
+                "Підтримуються всі додатні цифри.");
     };
 
     this.deleteGroup = function del(id) {
@@ -86,20 +96,30 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexChair = document.getElementById("updateChair").selectedIndex;
         var chairId = document.getElementById("updateChair").options[indexChair].value;
 
-        $http.get('/api/chair/get?id='+chairId).then(function (response) {
-            var selectedChair = response.data;
-            var req = {
-                method: 'POST',
-                url: 'api/group/update?id='+id,
-                data: {
-                    number: number,
-                    course: course,
-                    chair: selectedChair
-                }
-            };
-            $http(req).then(function (resp) {
-                window.location.reload();
-            })
-        });
+        if(number > 0) {
+            if(course > 0 && course < 7) {
+                $http.get('/api/chair/get?id=' + chairId).then(function (response) {
+                    var selectedChair = response.data;
+                    var req = {
+                        method: 'POST',
+                        url: 'api/group/update?id=' + id,
+                        data: {
+                            number: number,
+                            course: course,
+                            chair: selectedChair
+                        }
+                    };
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
+            }
+            else
+                window.alert("Введено некоректний курс!\n" +
+                    "Курс може бути в межах 1-6 включно.");
+        }
+        else
+            window.alert("Введено некоректний номер групи!\n" +
+                "Підтримуються всі додатні цифри.");
     };
 });

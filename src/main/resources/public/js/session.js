@@ -59,25 +59,30 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexCurriculum= document.getElementById("curriculum").selectedIndex;
         var curriculumId= document.getElementById("curriculum").options[indexCurriculum].value;
 
-        $http.get('/api/student/get?id='+ studentId).then(function (responseStudent) {
-            var selectedStudent= responseStudent.data;
-            $http.get('/api/curriculum/get?id='+ curriculumId).then(function (responseCurriculum) {
-                var selectedCurriculum = responseCurriculum.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/session/insert',
-                    data: {
-                        mark: mark,
-                        curriculum: selectedCurriculum,
-                        student: selectedStudent
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(mark > 0 && mark < 6) {
+            $http.get('/api/student/get?id=' + studentId).then(function (responseStudent) {
+                var selectedStudent = responseStudent.data;
+                $http.get('/api/curriculum/get?id=' + curriculumId).then(function (responseCurriculum) {
+                    var selectedCurriculum = responseCurriculum.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/session/insert',
+                        data: {
+                            mark: mark,
+                            curriculum: selectedCurriculum,
+                            student: selectedStudent
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректну оцінку!\n" +
+                "Коректна оцінка в межах 1-5 включно.");
     };
 
     this.deleteSession= function del(id) {
@@ -140,25 +145,30 @@ app.controller("AppCtrl", function ($scope, $http) {
         var indexStudent= document.getElementById("updateStudent").selectedIndex;
         var studentId= document.getElementById("updateStudent").options[indexStudent].value;
 
-        $http.get('/api/curriculum/get?id='+ curriculumId).then(function (responseCurriculum) {
-            var selectedCurriculum= responseCurriculum.data;
-            $http.get('/api/student/get?id='+ studentId).then(function (responseStudent) {
-                var selectedStudent= responseStudent.data;
-                var req = {
-                    method: 'POST',
-                    url: '/api/session/update?id=' + id,
-                    data: {
-                        mark: mark,
-                        curriculum: selectedCurriculum,
-                        student: selectedStudent
-                    }
-                };
-                console.log(req);
-                $http(req).then(function (resp) {
-                    window.location.reload();
-                })
+        if(mark > 0 && mark < 6) {
+            $http.get('/api/curriculum/get?id=' + curriculumId).then(function (responseCurriculum) {
+                var selectedCurriculum = responseCurriculum.data;
+                $http.get('/api/student/get?id=' + studentId).then(function (responseStudent) {
+                    var selectedStudent = responseStudent.data;
+                    var req = {
+                        method: 'POST',
+                        url: '/api/session/update?id=' + id,
+                        data: {
+                            mark: mark,
+                            curriculum: selectedCurriculum,
+                            student: selectedStudent
+                        }
+                    };
+                    console.log(req);
+                    $http(req).then(function (resp) {
+                        window.location.reload();
+                    })
+                });
             });
-        });
+        }
+        else
+            window.alert("Введено некоректну оцінку!\n" +
+                "Коректна оцінка в межах 1-5 включно.");
     };
 
     document.getElementById("student").addEventListener("change", changeStudentInsert);
